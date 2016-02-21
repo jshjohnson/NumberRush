@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>Numberwang</title>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <style>
+        html, body { height: 100%; }
+        h1,h2,h3,h4,h5,h6 { margin-top: 0; }
+        body { color: white; }
+        .cards { font-size: 0; }
+        .cards__header {
+            font-size: .6rem;
+            height: 6vh;
+            background-color: #334D5C;
+            text-align: center;
+            line-height: 6vh;
+        }
+        .cards__area { 
+            display: inline-block;
+            width: 50%;
+            height: 47vh;
+            font-size: 1rem;
+        }
+        .cards__area:nth-of-type(1n + 1) { background-color: #DF5A49; }
+        .cards__area:nth-of-type(2n + 1) { background-color: #45B29D; }
+        .cards__area:nth-of-type(3n + 1) { background-color: #EFC94C; }
+        .cards__area:nth-of-type(4n + 1) { background-color: #E27A3F; }
+        .cards__outer, .cards__inner {
+            width: 100%;
+            height: 100%;
+        }
+        .cards__outer {
+            display: table;
+            table-layout: fixed;
+            text-align: center;
+        }
+        .cards__inner {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .cards__focus {
+            -webkit-appearance: none;
+            border: 0;
+            background-color: transparent;
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            margin: auto;
+        }
+
+        .cards__answer {
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            padding: .6rem;
+            background-color: rgba(0,0,0,0.2);
+            width: 250px;
+        }
+
+        .cards__input {
+            position: absolute;
+            top: 0;
+            font-size: 1rem;
+        }
+        .cards__input--left { left: 0; }
+        .cards__input--right { right: 0; }
+
+        .cards__input--btn {
+            color: white;
+            background-color: transparent;
+            border: none;
+            padding: 0 1.4rem;
+            border-left: 1px solid white;
+        }
+        .cards__input--btn:focus { outline: 0; }
+
+        
+        .zero-bottom { margin-bottom: 0 !important; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/static/bundle.js"></script>
+  </body>
+</html>
