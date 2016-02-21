@@ -9,16 +9,31 @@
         .cards { font-size: 0; }
         .cards__header {
             font-size: .6rem;
-            height: 6vh;
+            height: 40px;
             background-color: #334D5C;
             text-align: center;
-            line-height: 6vh;
+            line-height: 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
         }
         .cards__area { 
+            position: relative;
             display: inline-block;
             width: 50%;
-            height: 47vh;
+            height: 100vh;
             font-size: 1rem;
+        }
+        .cards__area--disabled:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
         }
         .cards__area:nth-of-type(1n + 1) { background-color: #DF5A49; }
         .cards__area:nth-of-type(2n + 1) { background-color: #45B29D; }

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import 'whatwg-fetch';
 import RandomString from 'randomstring';
+import classNames from 'classnames';
 import utils from './libs/utils';
 
 const EN = {
@@ -25,8 +26,93 @@ const DE = {
     'join': 'und',
 }
 
-
 var Numberwang = React.createClass({
+
+    getInitialState: function() {
+
+        let modes = [
+            {
+                name: 'Easy',
+                numberRange: 100
+            }, 
+            {
+                name: 'Intermediate',
+                numberRange: 1000
+            }, 
+            {
+                name: 'Hard',
+                numberRange: 10000
+            }
+        ]
+
+        const DEFAULT_STATE = {
+            modes: modes,
+            score: 0,
+            numbers: this.getNewNumbers(2),
+        }
+
+        return DEFAULT_STATE;
+    },
+
+    reloadGame: function() {
+        this.setState({
+            score: 0,
+            numbers: this.getNewNumbers(2)
+        })
+    },
+
+    setGameMode: function(mode) {
+        this.setState({
+            currentMode: gamesModes[0]
+        })
+    },
+
+    handleGameModeChange: function(event) {
+        var selectedMode = this.state.modes.filter(function(mode) {
+            return mode.name == event.currentTarget.value;
+        });
+
+        this.setState({
+            currentMode: selectedMode[0],
+            numbers: this.getNewNumbers(2)
+        })
+    },
+
+    getNewNumbers: function(limit) {
+        let numbers = []
+        let numberLimit = limit || 1;
+        let numberCount = 0;
+
+        let getRandomNumber = function(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        };
+
+        let fillNumbersArray = function(){
+            
+            while(numberCount < numberLimit) {
+                let number = getRandomNumber(1, 1000);
+
+                if(numbers.indexOf(number) === -1) {
+
+                    numbers.push({
+                        id: RandomString.generate(6),
+                        digits: number,
+                        english: utils.capitalise(this.translateNum(number, EN, 'forwards', true)),
+                        german: utils.capitalise(this.translateNum(number, DE, 'backwards', false))
+                    });
+
+                    numberCount++;
+
+                } else {
+                    fillNumbersArray();
+                }
+            }  
+        }.bind(this);
+
+        fillNumbersArray();
+
+        return numbers;
+    },
 
     translateNum: function(num, lang, direction = 'forwards', space = true) {
         let whitespace = space ? ' ' : '';
@@ -80,66 +166,22 @@ var Numberwang = React.createClass({
         return convert(num);
     },
 
-    getNewNumbers: function(limit) {
-        let numbers = []
-        let numberLimit = limit || 4;
-        let numberCount = 0;
-
-        let getRandomNumber = function(min, max) {
-            return Math.floor(Math.random() * (max - min) + min);
-        };
-
-        let fillNumbersArray = function(){
-            while(numberCount < numberLimit) {
-                let number = getRandomNumber(1, 1000);
-
-                if(numbers.indexOf(number) === -1) {
-
-                    numbers.push({
-                        id: RandomString.generate(6),
-                        digits: number,
-                        english: utils.capitalise(this.translateNum(number, EN, 'forwards', true)),
-                        german: utils.capitalise(this.translateNum(number, DE, 'backwards', false))
-                    });
-
-                    numberCount++;
-
-                } else {
-                    fillNumbersArray();
-                }
-            }  
-        }.bind(this);
-
-        fillNumbersArray();
-
-        return numbers;
-    },
-
-    reloadGame: function() {
-        this.setState({
-            numbers: this.getNewNumbers(4)
-        })
-    },
-
-    getInitialState: function() {
-        return {
-            numbers: this.getNewNumbers(4),
-        }
-    },
-
     answer: function(response, answer) {
         if(response === answer.german || response === answer.german.toLowerCase()) {
             let numberArray = this.state.numbers;
             let answerIndex = numberArray.indexOf(answer);
             let newNumber = this.getNewNumbers(1);
 
+            // Remove correct answer 
             numberArray.splice(answerIndex, 1);
-            numberArray.splice(answerIndex, 0, newNumber[0]);
-
-            console.log(numberArray);
+            // Add new question
+            numberArray.push(newNumber[0]);
+            // Increment score 
+            let score = this.state.score + 5;
 
             return this.setState({
-                numbers: numberArray
+                numbers: numberArray,
+                score: score
             });
 
         } else {
@@ -151,19 +193,27 @@ var Numberwang = React.createClass({
         return (
             <div className="cards">
                 <header className="cards__header">
-                    <h1 className="zero-bottom cards__heading">German numbers</h1>
+                    <h1 className="zero-bottom cards__heading">Score: { this.state.score }</h1>
                     <button className="cards__input cards__input--right cards__input--btn" onClick={ this.reloadGame } value="Reload">Reload</button>
-                    <select className="cards__input cards__input--left" onChange={ this.changeDifficulty }>
-                        <option value="1">Easy</option>
-                        <option value="2">Intermediate</option>
-                        <option value="3">Hard</option>
+                    <select className="cards__input cards__input--left" onChange={ this.handleGameModeChange }>
+                       {
+                            this.state.modes.map(function(mode) {
+                                return (
+                                    <option key={ mode.name } value={ mode.name }>{ mode.name }</option>
+                                )
+                            })
+                       }
                     </select>
                 </header>
                 {
                     this.state.numbers.map(function(number) {
-                        console.log(number)
+                        let areaDisabled = true;
+                        if(this.state.numbers.indexOf(number) === 0) {
+                            areaDisabled = false;
+                        }
+
                         return (
-                            <NumberArea answer={this.answer} key={ number.id } number={ number } />
+                            <NumberArea areaDisabled={ areaDisabled } answer={ this.answer } key={ number.id } number={ number } />
                         ) 
                     }, this)
                 }
@@ -180,8 +230,13 @@ var NumberArea = React.createClass({
     },
 
     render: function(){
+        var areaClass = classNames({
+          'cards__area': true,
+          'cards__area--active': !this.props.areaDisabled,
+          'cards__area--disabled': this.props.areaDisabled 
+        });
         return (
-            <div className="cards__area">
+            <div className={ areaClass }>
                 <div className="cards__outer">
                     <div className="cards__inner">
                         <button className="cards__focus">{ this.props.number.digits }</button>
