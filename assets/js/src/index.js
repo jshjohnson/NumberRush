@@ -26,62 +26,90 @@ const DE = {
     'join': 'und',
 }
 
-var Numberwang = React.createClass({
+let modes = [
+    {
+        name: 'Easy',
+        numberRange: 100
+    }, 
+    {
+        name: 'Intermediate',
+        numberRange: 1000
+    }, 
+    {
+        name: 'Hard',
+        numberRange: 10000
+    }
+]
+
+let Numberwang = React.createClass({
 
     getInitialState: function() {
 
-        let modes = [
-            {
-                name: 'Easy',
-                numberRange: 100
-            }, 
-            {
-                name: 'Intermediate',
-                numberRange: 1000
-            }, 
-            {
-                name: 'Hard',
-                numberRange: 10000
-            }
-        ]
-
         const DEFAULT_STATE = {
             modes: modes,
+            currentMode: modes[0],
             score: 0,
-            numbers: this.getNewNumbers(2),
+            personalBest: 0,
+            numbers: [],
         }
 
-        return DEFAULT_STATE;
+        let SAVED_STATE = null;
+
+        if(localStorage.getItem('NumberwangState') !== null) {
+            SAVED_STATE = JSON.parse(localStorage.NumberwangState);
+        }
+
+        return SAVED_STATE || DEFAULT_STATE;
+    },
+
+    componentDidMount: function() {
+        let newState = {
+            numbers: this.getNewNumbers(1)
+        }
+
+        this.setState(newState);
+    },
+
+    componentDidUpdate: function(prevProps, prevState) {
+        localStorage.NumberwangState = JSON.stringify(this.state);
     },
 
     reloadGame: function() {
-        this.setState({
+        let newState = {
             score: 0,
-            numbers: this.getNewNumbers(2)
-        })
+            numbers: this.getNewNumbers(1)
+        }
+
+        this.setState(newState);
     },
 
-    setGameMode: function(mode) {
-        this.setState({
-            currentMode: gamesModes[0]
-        })
+    setGameMode: function(newMode) {
+        let newState = {
+            score: 0,
+            currentMode: newMode[0],
+        }
+
+        this.setState(newState, function(){
+            this.setState({
+                numbers: this.getNewNumbers(1),
+            })
+        });
     },
 
     handleGameModeChange: function(event) {
-        var selectedMode = this.state.modes.filter(function(mode) {
+        let selectedMode = this.state.modes.filter(function(mode) {
             return mode.name == event.currentTarget.value;
         });
 
-        this.setState({
-            currentMode: selectedMode[0],
-            numbers: this.getNewNumbers(2)
-        })
+        this.setGameMode(selectedMode);
     },
 
     getNewNumbers: function(limit) {
         let numbers = []
         let numberLimit = limit || 1;
         let numberCount = 0;
+        let numberRange = this.state.currentMode.numberRange;
+
 
         let getRandomNumber = function(min, max) {
             return Math.floor(Math.random() * (max - min) + min);
@@ -90,7 +118,7 @@ var Numberwang = React.createClass({
         let fillNumbersArray = function(){
             
             while(numberCount < numberLimit) {
-                let number = getRandomNumber(1, 1000);
+                let number = getRandomNumber(1, numberRange);
 
                 if(numbers.indexOf(number) === -1) {
 
@@ -181,7 +209,8 @@ var Numberwang = React.createClass({
 
             return this.setState({
                 numbers: numberArray,
-                score: score
+                score: score,
+                personalBest: score > this.state.personalBest ? score : this.state.personalBest
             });
 
         } else {
@@ -193,9 +222,9 @@ var Numberwang = React.createClass({
         return (
             <div className="cards">
                 <header className="cards__header">
-                    <h1 className="zero-bottom cards__heading">Score: { this.state.score }</h1>
+                    <h1 className="zero-bottom cards__heading">Score: { this.state.score } | Best: { this.state.personalBest }</h1>
                     <button className="cards__input cards__input--right cards__input--btn" onClick={ this.reloadGame } value="Reload">Reload</button>
-                    <select className="cards__input cards__input--left" onChange={ this.handleGameModeChange }>
+                    <select className="cards__input cards__input--left" onChange={ this.handleGameModeChange } value={ this.state.currentMode.name }>
                        {
                             this.state.modes.map(function(mode) {
                                 return (
@@ -231,9 +260,9 @@ var NumberArea = React.createClass({
 
     render: function(){
         var areaClass = classNames({
-          'cards__area': true,
-          'cards__area--active': !this.props.areaDisabled,
-          'cards__area--disabled': this.props.areaDisabled 
+            'cards__area': true,
+            'cards__area--active': !this.props.areaDisabled,
+            'cards__area--disabled': this.props.areaDisabled 
         });
         return (
             <div className={ areaClass }>
