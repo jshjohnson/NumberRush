@@ -4,7 +4,7 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "start": "opn http://localhost:3000 && node server.js",
-    "lint": "eslint ./assets/js/src"
+    "lint": "eslint ./assets/scripts/src"
   },
   "repository": {
     "type": "git",

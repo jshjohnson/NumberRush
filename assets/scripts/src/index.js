@@ -29,15 +29,23 @@ const DE = {
 let modes = [
     {
         name: 'Easy',
-        numberRange: 100
+        numberRange: 50,
+        multiplier: 2
     }, 
     {
         name: 'Intermediate',
-        numberRange: 1000
+        numberRange: 100,
+        multiplier: 4
     }, 
     {
         name: 'Hard',
-        numberRange: 10000
+        numberRange: 1000,
+        multiplier: 8
+    },
+    {
+        name: 'Extreme',
+        numberRange: 10000,
+        multipier: 12
     }
 ]
 
@@ -51,6 +59,7 @@ let Numberwang = React.createClass({
             score: 0,
             personalBest: 0,
             numbers: [],
+            mute: false
         }
 
         let SAVED_STATE = null;
@@ -85,7 +94,6 @@ let Numberwang = React.createClass({
 
     setGameMode: function(newMode) {
         let newState = {
-            score: 0,
             currentMode: newMode[0],
         }
 
@@ -205,7 +213,13 @@ let Numberwang = React.createClass({
             // Add new question
             numberArray.push(newNumber[0]);
             // Increment score 
-            let score = this.state.score + 5;
+            let score = this.state.score + this.state.currentMode.multiplier;
+
+            if(!this.state.mute) {
+                // Play sound
+                let audio = new Audio('../../assets/audio/correct.mp3');
+                audio.play();
+            }
 
             return this.setState({
                 numbers: numberArray,
@@ -213,8 +227,11 @@ let Numberwang = React.createClass({
                 personalBest: score > this.state.personalBest ? score : this.state.personalBest
             });
 
-        } else {
-            console.log('Wrong answer :(');
+        } else if(response) {
+            if(!this.state.mute) {
+                let audio = new Audio('../../assets/audio/incorrect.mp3');
+                audio.play();
+            }
         }
     },
 

@@ -9,10 +9,10 @@
         .cards { font-size: 0; }
         .cards__header {
             font-size: .6rem;
-            height: 40px;
+            height: 50px;
             background-color: #334D5C;
             text-align: center;
-            line-height: 40px;
+            line-height: 50px;
             position: fixed;
             top: 0;
             left: 0;
@@ -70,14 +70,14 @@
             background-color: rgba(0,0,0,0.2);
             width: 250px;
         }
-
         .cards__input {
+            top: 50%;
+            transform: translateY(-50%);
             position: absolute;
-            top: 0;
             font-size: 1rem;
         }
-        .cards__input--left { left: 0; }
-        .cards__input--right { right: 0; }
+        .cards__input--left { left: 1rem; }
+        .cards__input--right { right: 1rem; }
 
         .cards__input--btn {
             color: white;
