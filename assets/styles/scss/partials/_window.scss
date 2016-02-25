@@ -11,17 +11,6 @@ $window-focus-font-size: 20rem;
     display: inline-block;
     width: 100vw;
     height: 100vh;
-    background-color: #1C313E;
-}
-
-.window__area--disabled:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
 }
 
 .window__outer, .window__inner {

@@ -417,7 +417,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 1.6rem;
   overflow-x: hidden;
-  background-color: #f2f2f2;
+  background-color: #293e4a;
   color: #fff; }
   @media (max-width: 769px) {
     body {
@@ -630,17 +630,7 @@ ol {
   position: relative;
   display: inline-block;
   width: 100vw;
-  height: 100vh;
-  background-color: #1C313E; }
-
-.window__area--disabled:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); }
+  height: 100vh; }
 
 .window__outer, .window__inner {
   width: 100%;

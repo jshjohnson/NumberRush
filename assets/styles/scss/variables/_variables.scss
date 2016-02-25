@@ -13,8 +13,8 @@ $brand-grey-lighter: #333;
 $brand-white: #fff;
 $brand-black: #000;
 
-$brand-primary: #DA2A31;
-$brand-body-bg: #f2f2f2;
+$brand-primary: #334D5C;
+$brand-body-bg: mix($brand-black, $brand-primary, 20%);
 $brand-text-color: $brand-white;
 $brand-link: #DA2A31;
 $brand-keyline: #eaeaea;
