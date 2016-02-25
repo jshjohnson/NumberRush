@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Global variables
+   ========================================================================== */
+
+/* Brand
+-------------------------------------------------------------- */
+$brand-grey-darker:#999;
+$brand-grey-dark: #777;
+$brand-grey: #555;
+$brand-grey-light: #444;
+$brand-grey-lighter: #333;
+
+$brand-white: #fff;
+$brand-black: #000;
+
+$brand-primary: #DA2A31;
+$brand-body-bg: #f2f2f2;
+$brand-text-color: $brand-white;
+$brand-link: #DA2A31;
+$brand-keyline: #eaeaea;
+
+/* Spacing
+-------------------------------------------------------------- */
+$global-guttering: 2.4rem;
+
+/* Typography
+-------------------------------------------------------------- */
+$global-font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$global-font-family-serif: Georgia, "Times New Roman", Times, serif !default;
+$global-font-family-base: $global-font-family-sans-serif !default;
+
+$global-font-size-xl:    2.2rem;    // 22px
+$global-font-size-lg:    1.8rem;    // 18px
+$global-font-size-base:  1.6rem;    // 16px
+$global-font-size-sm:    1.4rem;    // 14px
+$global-font-size-xs:    1.2rem;    // 12px
+$global-font-size-xxs:   1rem;      // 10px
+
+$global-font-size-h1:    3.4rem;    // 36px
+$global-font-size-h2:    2.6rem;    // 30px
+$global-font-size-h3:    2rem;      // 24px
+$global-font-size-h4:    1.8rem;    // 20px
+$global-font-size-h5:    1.6rem;    // 18px
+$global-font-size-h6:    $global-font-size-base; // 16px
+
+//** Unit-less `line-height` for use in components like buttons.
+$global-line-height-xl: 2.4;
+$global-line-height-lg: 2;
+$global-line-height-base: 1.6;
+$global-line-height-sm: 1.4;
+$global-line-height-xs: 1.2;
+
+//** By default, this inherits from the `<body>`.
+$global-headings-font-family: inherit !default;
+$global-headings-font-weight: 500;
+$global-headings-line-height: 1.4;
+$global-headings-color: inherit !default;
+
+/* Breakpoints
+-------------------------------------------------------------- */
+$global-screen-xxs: 360px;
+$global-screen-xxs-min: $global-screen-xxs !default;
+
+$global-screen-xs: 480px !default;
+$global-screen-xs-min: $global-screen-xs !default;
+
+$global-screen-sm: 770px !default;
+$global-screen-sm-min: $global-screen-sm !default;
+
+$global-screen-md: 1000px !default;
+$global-screen-md-min: $global-screen-md !default;
+
+$global-screen-lg: 1250px !default;
+$global-screen-lg-min: $global-screen-lg !default;
+
+$global-screen-xl: 1600px !default;
+$global-screen-xl-min: $global-screen-xl !default;
+
+$global-screen-xxl: 1800px;
+$global-screen-xxl-min: $global-screen-xxl !default;
+
+// So media queries don't overlap when required, provide a maximum
+$global-screen-xs-max: $global-screen-sm-min !default;
+$global-screen-sm-max: $global-screen-md-min - 1 !default;
+$global-screen-md-max: $global-screen-lg-min - 1 !default;
+$global-screen-lg-max: $global-screen-xl-min - 1 !default;
+
+/* Grid
+-------------------------------------------------------------- */
+$global-grid-columns: 12;
+$global-grid-gutter-width: 2.8rem;
+
+/* Z-index
+-------------------------------------------------------------- */
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+// $global-zindex-tooltip: 1040;

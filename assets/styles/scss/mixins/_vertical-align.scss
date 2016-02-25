@@ -1,0 +1,19 @@
+/*
+* Mixin name: Vertical align
+* Use: Vertical align within a fixed height parent (requires relative positioning)
+* Notes: http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
+-------------------------------------------------------------- */
+
+@mixin vertical-align {
+    .csstransforms & {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+
+@mixin vertical-align-unprefixed {
+    top: 50%;
+    transform: translateY(-50%);
+    .no-csstransforms & { top: auto; }
+}

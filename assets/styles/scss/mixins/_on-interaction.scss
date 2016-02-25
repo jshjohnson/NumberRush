@@ -1,0 +1,13 @@
+/*
+* Mixin name: On interaction
+* Use: Applying same styling to hover,active and focus states
+* Notes: N/A
+-------------------------------------------------------------- */
+
+@mixin on-interaction {
+    &:hover,
+    &:active,
+    &:focus {
+        @content;
+    }
+}

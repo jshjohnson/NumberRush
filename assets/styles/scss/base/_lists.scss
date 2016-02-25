@@ -1,0 +1,94 @@
+/*
+* Name: Lists
+* Notes: N/A
+-------------------------------------------------------------- */
+
+ul,
+ol {
+    margin-top: 0;
+    margin-bottom: $global-guttering/2;
+    ul,
+    ol {
+        margin-bottom: 0;
+    }
+}
+
+ol {
+    counter-reset: top sub subsub;
+    list-style-type: none;
+    padding-left: 0;
+    padding-bottom: $global-guttering/2;
+    li {
+        &:before {
+            counter-increment: top;
+            content: counter(top) ": ";
+            font-weight: bold;
+        }
+        margin-bottom: $global-guttering/2;
+    }
+    ol {
+        margin-top: $global-guttering/2;
+        padding-left: 1em;
+        counter-reset: sub;
+        ol {
+            padding-left: 2em;
+            counter-reset: subsub;
+            li:before {
+                counter-increment: sub;
+                content: counter(top) "." counter(sub) ": ";
+            }
+            ol li:before {
+                counter-increment: subsub;
+                content: counter(top) "." counter(sub) "." counter(subsub) ": ";
+            }
+        }
+    }
+}
+
+// List options
+
+// Unstyled keeps list items block level, just removes default browser padding and list-style
+.list-unstyled, %list-unstyled {
+    padding-left: 0;
+    padding-bottom: 0;
+    margin-left: 0;
+    list-style: none;
+    li:before { content: none; }
+}
+
+// Inline turns list items into inline-block
+.list-inline, %list-inline {
+    @extend %list-unstyled;
+    margin-top: -5px;
+    > li {
+        display: inline-block;
+        margin-right: 1.4rem;
+        margin-top: 5px;
+        &:last-child { margin-right: 0; }
+    }
+}
+
+.list-inline--divided {
+    li {
+        &:after {
+            content: "|";
+            margin-left: $global-guttering/2;
+        }
+        &:last-child {
+            &:after { content: none; }
+        }   
+    }
+}
+
+.list-inline--blocked {
+    display: block;
+    width: 100%;
+}
+
+.list-inline--fluid {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    > li { display: table-cell; }
+}

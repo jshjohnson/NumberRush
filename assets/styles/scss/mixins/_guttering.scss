@@ -1,0 +1,29 @@
+/*
+* Mixin name: Guttering
+* Use: Controlling the spacing at the bottom of a module
+* Notes: http://css-tricks.com/spacing-the-bottom-of-modules/
+-------------------------------------------------------------- */
+
+@mixin guttering {
+    & > *:last-child,
+    & > *:last-child > *:last-child,
+    & > *:last-child > *:last-child > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@mixin guttering-reversed {
+    & > *:last-child,
+    & > *:last-child > *:last-child,
+    & > *:last-child > *:last-child > *:last-child {
+        margin-top: 0;
+    }
+}
+
+@mixin guttering-all {
+    & > *:last-child,
+    & > *:last-child > *:last-child,
+    & > *:last-child > *:last-child > *:last-child {
+        margin: 0;
+    }
+}

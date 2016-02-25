@@ -237,11 +237,14 @@ let Numberwang = React.createClass({
 
     render: function() {
         return (
-            <div className="cards">
-                <header className="cards__header">
-                    <h1 className="zero-bottom cards__heading">Score: { this.state.score } | Best: { this.state.personalBest }</h1>
-                    <button className="cards__input cards__input--right cards__input--btn" onClick={ this.reloadGame } value="Reload">Reload</button>
-                    <select className="cards__input cards__input--left" onChange={ this.handleGameModeChange } value={ this.state.currentMode.name }>
+            <div className="window">
+                <header className="header">
+                    <ul className="header__list list-unstyled list-inline list-inline--divided zero-bottom">
+                        <li><strong>Score:</strong> { this.state.score }</li>
+                        <li><strong>Best:</strong> { this.state.personalBest }</li>
+                    </ul>
+                    <button className="window__input window__input--right window__input--btn" onClick={ this.reloadGame } value="Reload">Reload</button>
+                    <select className="window__input window__input--push-left" onChange={ this.handleGameModeChange } value={ this.state.currentMode.name }>
                        {
                             this.state.modes.map(function(mode) {
                                 return (
@@ -277,18 +280,18 @@ var NumberArea = React.createClass({
 
     render: function(){
         var areaClass = classNames({
-            'cards__area': true,
-            'cards__area--active': !this.props.areaDisabled,
-            'cards__area--disabled': this.props.areaDisabled 
+            'window__area': true,
+            'window__area--active': !this.props.areaDisabled,
+            'window__area--disabled': this.props.areaDisabled 
         });
         return (
             <div className={ areaClass }>
-                <div className="cards__outer">
-                    <div className="cards__inner">
-                        <button className="cards__focus">{ this.props.number.digits }</button>
+                <div className="window__outer">
+                    <div className="window__inner">
+                        <h2 className="window__focus">{ this.props.number.digits }</h2>
                         <p>{ this.props.number.english }</p>
                         <p>{ this.props.number.german }</p>
-                        <input type="text" className="cards__answer" onKeyUp={ this.handleKeyUp }></input>
+                        <input type="text" className="window__answer" onKeyUp={ this.handleKeyUp }></input>
                     </div>
                 </div>
             </div>
