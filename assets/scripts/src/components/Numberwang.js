@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // Utilities
 import RandomString from 'randomstring';
 import utils from '../libs/utils';
+import { merge } from 'lodash/object';
 
 // Components
 import NumberArea from './NumberArea';
@@ -34,7 +35,7 @@ const DEFAULT_STATE = {
 class Numberwang extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
 
         let SAVED_STATE = null;
 
@@ -51,6 +52,13 @@ class Numberwang extends Component {
             { name: 'Mute', action: this.toggleGameAudio, active: true },
             { name: 'Unmute', action: this.toggleGameAudio, active: false }
         ];
+
+        if(localStorage.getItem('NumberwangState') !== null) {
+            let savedState = JSON.parse(localStorage.NumberwangState);
+            
+            controls = merge(controls, savedState.controls);
+            console.log(controls);
+        }
 
         let newState = {
             numbers: this.getNewNumbers(1),
