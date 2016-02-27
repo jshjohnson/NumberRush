@@ -53,11 +53,10 @@ class Numberwang extends Component {
             { name: 'Unmute', action: this.toggleGameAudio, active: false }
         ];
 
+        // Don't override controls if user has a saved state already
         if(localStorage.getItem('NumberwangState') !== null) {
             let savedState = JSON.parse(localStorage.NumberwangState);
-            
             controls = merge(controls, savedState.controls);
-            console.log(controls);
         }
 
         let newState = {
@@ -101,7 +100,8 @@ class Numberwang extends Component {
         });
     };
 
-    toggleGameAudio = (control) => {
+    toggleGameAudio = () => {
+        console.log(controls);
         let controls = [
             { name: 'Restart', action: this.restartGame, active: true },
             { name: 'Mute', action: this.toggleGameAudio, active: this.state.mute ? true : false },
@@ -154,8 +154,9 @@ class Numberwang extends Component {
                     numbers.push({
                         id: RandomString.generate(6),
                         digits: number,
-                        english: utils.capitalise(this.translateNum(number, EN, 'forwards', true)),
-                        german: utils.capitalise(this.translateNum(number, DE, 'backwards', false)),
+                        questionLanguage: utils.capitalise(this.translateNum(number, EN, 'forwards', true)),
+                        answerLanguage: utils.capitalise(this.translateNum(number, DE, 'backwards', false)),
+                        answerAttempts: 0,
                     });
 
                     numberCount++;
@@ -232,10 +233,10 @@ class Numberwang extends Component {
 
     answer = (response, answer) => {
         if ( 
-            response === answer.german || 
-            response === this.removeDiacritics(answer.german) || 
-            response === answer.german.toLowerCase() ||
-            response === this.removeDiacritics(answer.german).toLowerCase()
+            response === answer.answerLanguage || 
+            response === this.removeDiacritics(answer.answerLanguage) || 
+            response === answer.answerLanguage.toLowerCase() ||
+            response === this.removeDiacritics(answer.answerLanguage).toLowerCase()
         ) {
             let numberArray = this.state.numbers;
             let answerIndex = numberArray.indexOf(answer);
@@ -269,6 +270,7 @@ class Numberwang extends Component {
                 let audio = new Audio('../../assets/audio/incorrect.mp3');
                 audio.play();
             }
+            let currentNumber = this.state.numbers[0];
         }
     };
 
@@ -287,7 +289,7 @@ class Numberwang extends Component {
                             areaDisabled = false;
                         }
                         return (
-                            <NumberArea areaDisabled={ areaDisabled } answer={ this.answer } key={ number.id } number={ number } />
+                            <NumberArea areaDisabled={ areaDisabled } answer={ this.answer } key={ number.id } number={ number } cheatMode={ this.props.cheatMode }/>
                         ) 
                     }, this)
                 }

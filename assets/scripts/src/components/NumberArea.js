@@ -25,8 +25,10 @@ class NumberArea extends Component {
                 <div className="window__outer">
                     <div className="window__inner">
                         <h2 className="window__focus">{ this.props.number.digits }</h2>
-                        <p>{ this.props.number.english }</p>
-                        <p>{ this.props.number.german }</p>
+                        <p>{ this.props.number.questionLanguage }</p>
+                        { this.props.cheatMode &&
+                            <p>{ this.props.number.answerLanguage }</p>
+                        } 
                         <input ref="input" type="text" className="window__answer" onKeyUp={ this.handleKeyUp } autofocus></input>
                     </div>
                 </div>
