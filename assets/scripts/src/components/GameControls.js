@@ -4,7 +4,19 @@ import ReactDOM from 'react-dom';
 class GameControls extends Component {
     render() {
         return (
-            <button className="window__input window__input--right window__input--btn" onClick={ this.props.reload } value="Reload">Reload</button>
+            <controls>
+                <ul className="window__controls list-unstyled">
+                    {
+                        this.props.controls.map(function(control) {
+                            if(control.active) {
+                                return (
+                                    <button className="window__input window__input--btn" key={ control.name } onClick={ control.action } value={ control.name }>{ control.name }</button>
+                                )
+                            } 
+                        }, this)
+                    }
+                </ul>
+            </controls>
         )
     };
 };

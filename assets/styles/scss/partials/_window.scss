@@ -49,10 +49,16 @@ $window-focus-font-size: 20rem;
     width: 250px;
 }
 
-.window__input {
+.window__input--absolute {
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
+}
+
+.window__controls {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .window__input--left { right: 0; }

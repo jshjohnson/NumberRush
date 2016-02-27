@@ -665,11 +665,16 @@ ol {
   background-color: rgba(0, 0, 0, 0.2);
   width: 250px; }
 
-.window__input {
+.window__input--absolute {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   position: absolute; }
+
+.window__controls {
+  position: absolute;
+  right: 0;
+  top: 0; }
 
 .window__input--left {
   right: 0; }
