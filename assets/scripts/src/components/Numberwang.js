@@ -24,8 +24,10 @@ const REMAINING_TIME = 60000;
 const DEFAULT_STATE = {
     modes: modes,
     currentMode: modes[0],
+    answerAttempts: 0,
     score: 0,
     personalBest: 0,
+    currentNumber: [],
     numbers: [],
     mute: false,
     remainingTime: REMAINING_TIME,
@@ -59,8 +61,12 @@ class Numberwang extends Component {
             controls = merge(controls, savedState.controls);
         }
 
+        let numbers = this.getNewNumbers(1);
+
         let newState = {
-            numbers: this.getNewNumbers(1),
+            answerAttempts: 0,
+            currentNumber: numbers[0],
+            numbers,
             controls
         }
 
@@ -88,6 +94,7 @@ class Numberwang extends Component {
 
     restartGame = () => {
         let newState = {
+            answerAttempts: 0,
             score: 0,
             numbers: this.getNewNumbers(1),
             remainingTime: REMAINING_TIME
@@ -121,9 +128,12 @@ class Numberwang extends Component {
             currentMode: newMode[0],
         }
 
+        let numbers = this.getNewNumbers(1);
+
         this.setState(newState, function(){
             return this.setState({
-                numbers: this.getNewNumbers(1),
+                currentNumber: numbers[0],
+                numbers,
             })
         });
     };
@@ -136,42 +146,7 @@ class Numberwang extends Component {
         this.setGameMode(selectedMode);
     };
 
-    getNewNumbers = (limit) => {
-        let numbers = []
-        let numberLimit = limit || 1;
-        let numberCount = 0;
-        let numberRange = this.state.currentMode.numberRange;
-
-        let getRandomNumber = function(min, max) {
-            return Math.floor(Math.random() * (max - min) + min);
-        };
-
-        let fillNumbersArray = function(){
-            while(numberCount < numberLimit) {
-                let number = getRandomNumber(1, numberRange);
-
-                if(numbers.indexOf(number) === -1) {
-                    numbers.push({
-                        id: RandomString.generate(6),
-                        digits: number,
-                        questionLanguage: utils.capitalise(this.translateNum(number, EN, 'forwards', true)),
-                        answerLanguage: utils.capitalise(this.translateNum(number, DE, 'backwards', false)),
-                        answerAttempts: 0,
-                    });
-
-                    numberCount++;
-                } else {
-                    fillNumbersArray();
-                }
-            }  
-        }.bind(this);
-
-        fillNumbersArray();
-
-        return numbers;
-    };
-
-    translateNum = (num, lang, direction = 'forwards', space = true) => {
+    translateNumber = (num, lang, direction = 'forwards', space = true) => {
         let whitespace = space ? ' ' : '';
 
         let convertMillions = function(num) {
@@ -210,7 +185,12 @@ class Numberwang extends Component {
                 if(direction === 'forwards') {  
                     return lang.tens[Math.floor(num / 10)] + whitespace + lang.ones[num % 10];
                 } else {
-                    return lang.ones[num % 10] + whitespace + lang.join + whitespace + lang.tens[Math.floor(num / 10)];
+                    if(num % 10 === 0) { 
+                        // If number is divisible by ten
+                        return lang.tens[Math.floor(num / 10)];
+                    } else { 
+                        return lang.ones[num % 10] + whitespace + lang.join + whitespace + lang.tens[Math.floor(num / 10)]; 
+                    }
                 }
             }
         }
@@ -223,6 +203,41 @@ class Numberwang extends Component {
         return convert(num);
     };
 
+    getNewNumbers = (limit) => {
+        let numbers = []
+        let numberLimit = limit || 1;
+        let numberCount = 0;
+        let numberRange = this.state.currentMode.numberRange;
+
+        let getRandomNumber = function(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        };
+
+        let fillNumbersArray = function(){
+            while(numberCount < numberLimit) {
+                let number = getRandomNumber(1, numberRange);
+
+                // If number doesn't already exist in numbers array
+                if(numbers.indexOf(number) === -1) {
+                    numbers.push({
+                        id: RandomString.generate(6),
+                        digits: number,
+                        questionLanguage: utils.capitalise(this.translateNumber(number, EN, 'forwards', true)),
+                        answerLanguage: utils.capitalise(this.translateNumber(number, DE, 'backwards', false)),
+                    });
+
+                    numberCount++;
+                } else {
+                    fillNumbersArray();
+                }
+            }  
+        }.bind(this);
+
+        fillNumbersArray();
+
+        return numbers;
+    };
+
     removeDiacritics = (string) => {
         diacriticMap.forEach(function(element, index) {
             string = string.replace(diacriticMap[index].letters, diacriticMap[index].base);
@@ -231,46 +246,60 @@ class Numberwang extends Component {
         return string;
     };
 
+    handleSuccess = (answer) => {
+        let numberArray = this.state.numbers;
+        let answerIndex = numberArray.indexOf(answer);
+        let newNumber = this.getNewNumbers(1);
+
+        // Remove correct answer 
+        numberArray.splice(answerIndex, 1);
+        // Add new question
+        numberArray.push(newNumber[0]);
+        // Increment score 
+        let score = this.state.score + this.state.currentMode.multiplier;
+
+        // If game hasn't been muted
+        if(!this.state.mute) {
+            // Play sound
+            let audio = new Audio('../../assets/audio/correct.mp3');
+            audio.play();
+        }
+
+        let newState = {
+            currentNumber: numberArray[0],
+            numbers: numberArray,
+            score: score,
+            personalBest: score > this.state.personalBest ? score : this.state.personalBest,
+            answerAttempts: 0
+        }
+
+        // Update state
+        return this.setState(newState);
+    };
+
+    handleFailure = () => {
+        this.setState({
+            answerAttempts: this.state.answerAttempts + 1
+        });
+
+        if(!this.state.mute) {
+            let audio = new Audio('../../assets/audio/incorrect.mp3');
+            audio.play();
+        }
+    };
+
+    isCorrect = (response, answer) => {
+        let responseSanitised = response.toLowerCase();
+        let answerSanitised = answer.answerLanguage.toLowerCase();
+
+        return (responseSanitised === answerSanitised || responseSanitised === this.removeDiacritics(answerSanitised)) ? true : false;
+    };
+
     answer = (response, answer) => {
-        if ( 
-            response === answer.answerLanguage || 
-            response === this.removeDiacritics(answer.answerLanguage) || 
-            response === answer.answerLanguage.toLowerCase() ||
-            response === this.removeDiacritics(answer.answerLanguage).toLowerCase()
-        ) {
-            let numberArray = this.state.numbers;
-            let answerIndex = numberArray.indexOf(answer);
-            let newNumber = this.getNewNumbers(1);
-
-            // Remove correct answer 
-            numberArray.splice(answerIndex, 1);
-            // Add new question
-            numberArray.push(newNumber[0]);
-            // Increment score 
-            let score = this.state.score + this.state.currentMode.multiplier;
-
-            // If game hasn't been muted
-            if(!this.state.mute) {
-                // Play sound
-                let audio = new Audio('../../assets/audio/correct.mp3');
-                audio.play();
-            }
-
-            let newState = {
-                numbers: numberArray,
-                score: score,
-                personalBest: score > this.state.personalBest ? score : this.state.personalBest
-            }
-
-            // Update state
-            return this.setState(newState);
-
+        if (this.isCorrect(response, answer)) {
+            this.handleSuccess(answer);
         } else if(response) {
-            if(!this.state.mute) {
-                let audio = new Audio('../../assets/audio/incorrect.mp3');
-                audio.play();
-            }
-            let currentNumber = this.state.numbers[0];
+            this.handleFailure();
         }
     };
 
@@ -284,12 +313,8 @@ class Numberwang extends Component {
                 </header>
                 {
                     this.state.numbers.map(function(number) {
-                        let areaDisabled = true;
-                        if(this.state.numbers.indexOf(number) === 0) {
-                            areaDisabled = false;
-                        }
                         return (
-                            <NumberArea areaDisabled={ areaDisabled } answer={ this.answer } key={ number.id } number={ number } cheatMode={ this.props.cheatMode }/>
+                            <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } key={ number.id } number={ number } cheatMode={ this.props.cheatMode }/>
                         ) 
                     }, this)
                 }

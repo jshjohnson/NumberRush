@@ -8,6 +8,10 @@ class NumberArea extends Component {
         ReactDOM.findDOMNode(this.refs.input).focus();
     };
 
+    componentDidUpdate() {
+        console.log(this.props);
+    };
+
     handleKeyUp = (event) => {
         if(event.which == 13) {
             this.props.answer(event.currentTarget.value, this.props.number);
@@ -26,6 +30,9 @@ class NumberArea extends Component {
                     <div className="window__inner">
                         <h2 className="window__focus">{ this.props.number.digits }</h2>
                         <p>{ this.props.number.questionLanguage }</p>
+                        { this.props.answerAttempts >= 5 &&
+                            <p><strong>Clue:</strong> { this.props.number.answerLanguage }</p>
+                        }
                         { this.props.cheatMode &&
                             <p>{ this.props.number.answerLanguage }</p>
                         } 
