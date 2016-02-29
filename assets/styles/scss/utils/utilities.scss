@@ -1,0 +1,111 @@
+//
+// Utility classes
+// --------------------------------------------------
+
+.disabled, .is-disabled, fieldset[disabled] { cursor: not-allowed; }
+.contained, %contained { position: relative; }
+
+.kill-scroll { overflow: hidden; }
+
+// Floats
+.clearfix, %clearfix { @include clearfix; }
+
+.center-block, %center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// Only display content to screen readers
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+// Hide from screenreaders and browsers
+.hide, %hide { display: none !important; }
+.show, %show { display: block !important; }
+.invisible, %invisible { visibility: hidden !important; }
+.hidden, %hidden { @extend %hide, %invisible; }
+
+// Last child margin handling
+.guttering { @include guttering; }
+
+// Float spacing
+.pull-right { float: right !important; }
+.pull-left { float: left !important; }
+
+// Add spacing
+.push { margin: $global-guttering !important; }
+.push-left { margin-left: $global-guttering !important; }
+.push-right { margin-right: $global-guttering !important; }
+.push-bottom { margin-bottom: $global-guttering !important; }
+.push-top { margin-top: $global-guttering !important; }
+
+.nudge { margin: $global-guttering/3 !important; }
+.nudge-left { margin-left: $global-guttering/3 !important; }
+.nudge-right { margin-right: $global-guttering/3 !important; }
+.nudge-bottom { margin-bottom: $global-guttering/3 !important; }
+.nudge-top { margin-top: $global-guttering/3 !important; }
+
+// Remove spacing
+.zero { margin: 0 !important; }
+.zero-top { margin-top: 0 !important; }
+.zero-bottom { margin-bottom: 0 !important; }
+.zero-left { margin-left: 0 !important; }
+.zero-right {  margin-right: 0 !important; }
+
+.zero-pad { padding: 0 !important; }
+.zero-pad-bottom { padding-bottom: 0 !important; }
+.zero-pad-top { padding-top: 0 !important; }
+.zero-pad-left { padding-left: 0 !important; }
+.zero-pad-right { padding-right: 0 !important; }
+
+// Remove borders
+.zero-border-bottom { border-bottom: 0 !important; }
+.zero-border-top { border-top: 0 !important; }
+.zero-border-left { border-left: 0 !important; }
+.zero-border-right { border-right: 0 !important; }
+
+.interaction { cursor: pointer; }
+.no-interaction { cursor: default; }
+
+// Alignment
+.text-left, %text-left { text-align: left; }
+.text-right, %text-right { text-align: right; }
+.text-center, %text-center { text-align: center; }
+.text-justify, %text-justify { text-align: justify; }
+.text-right-max-xs, %text-right-max-xs { @include respond-max($global-screen-sm) { text-align: right; }}
+.text-right-min-sm, %text-right-min-sm { @include respond-min($global-screen-sm-min) { text-align: right; }}
+
+// Weighting
+.text-light, %text-light { font-weight: lighter; }
+.text-normal, %text-normal { font-weight: normal; }
+.text-strong, %text-strong { font-weight: bold; }
+
+// Transform
+.text-capitalise, %text-capitalise { text-transform: capitalize; }
+.text-linethrough, %text-linethrough { text-decoration: line-through; }
+
+// Keylines
+.keyline-top { border-top: 1px solid $brand-keyline; }
+.keyline-bottom { border-bottom: 1px solid $brand-keyline; }
+.keyline-right { border-right: 1px solid $brand-keyline; }
+.keyline-left { border-left: 1px solid $brand-keyline;}
+
+.zero-keyline { border: 0 !important; }
+.zero-keyline-top { border-top: none !important; }
+.zero-keyline-bottom { border-bottom: none !important; }
+.zero-keyline-right { border-right: none !important; }
+.zero-keyline-left { border-left: none !important; }
+
+// Interactions
+.no-select { user-select: none; }
+.no-decoration { &:hover, &:focus { text-decoration: none; }}
+.no-interaction { &:hover, &:focus { color: inherit !important; }}

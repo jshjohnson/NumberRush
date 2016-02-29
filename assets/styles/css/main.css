@@ -652,12 +652,18 @@ ol {
   font-size: 20rem;
   font-weight: bold;
   color: white;
-  margin: auto; }
+  margin: 0 auto 2.4rem; }
   @media (max-width: 769px) {
     .window__focus {
       font-size: 10rem; } }
 
-.window__answer {
+.window__focus--sm {
+  font-size: 10rem; }
+  @media (max-width: 769px) {
+    .window__focus--sm {
+      font-size: 5rem; } }
+
+.window__form-control {
   -webkit-appearance: none;
   background-color: transparent;
   border: none;
@@ -696,3 +702,206 @@ ol {
   border-left: 1px solid white; }
   .window__input--btn:focus {
     outline: 0; }
+
+.disabled, .is-disabled, fieldset[disabled] {
+  cursor: not-allowed; }
+
+.contained {
+  position: relative; }
+
+.kill-scroll {
+  overflow: hidden; }
+
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.hide, .hidden {
+  display: none !important; }
+
+.show {
+  display: block !important; }
+
+.invisible, .hidden {
+  visibility: hidden !important; }
+
+.guttering > *:last-child,
+.guttering > *:last-child > *:last-child,
+.guttering > *:last-child > *:last-child > *:last-child {
+  margin-bottom: 0; }
+
+.pull-right {
+  float: right !important; }
+
+.pull-left {
+  float: left !important; }
+
+.push {
+  margin: 2.4rem !important; }
+
+.push-left {
+  margin-left: 2.4rem !important; }
+
+.push-right {
+  margin-right: 2.4rem !important; }
+
+.push-bottom {
+  margin-bottom: 2.4rem !important; }
+
+.push-top {
+  margin-top: 2.4rem !important; }
+
+.nudge {
+  margin: 0.8rem !important; }
+
+.nudge-left {
+  margin-left: 0.8rem !important; }
+
+.nudge-right {
+  margin-right: 0.8rem !important; }
+
+.nudge-bottom {
+  margin-bottom: 0.8rem !important; }
+
+.nudge-top {
+  margin-top: 0.8rem !important; }
+
+.zero {
+  margin: 0 !important; }
+
+.zero-top {
+  margin-top: 0 !important; }
+
+.zero-bottom {
+  margin-bottom: 0 !important; }
+
+.zero-left {
+  margin-left: 0 !important; }
+
+.zero-right {
+  margin-right: 0 !important; }
+
+.zero-pad {
+  padding: 0 !important; }
+
+.zero-pad-bottom {
+  padding-bottom: 0 !important; }
+
+.zero-pad-top {
+  padding-top: 0 !important; }
+
+.zero-pad-left {
+  padding-left: 0 !important; }
+
+.zero-pad-right {
+  padding-right: 0 !important; }
+
+.zero-border-bottom {
+  border-bottom: 0 !important; }
+
+.zero-border-top {
+  border-top: 0 !important; }
+
+.zero-border-left {
+  border-left: 0 !important; }
+
+.zero-border-right {
+  border-right: 0 !important; }
+
+.interaction {
+  cursor: pointer; }
+
+.no-interaction {
+  cursor: default; }
+
+.text-left {
+  text-align: left; }
+
+.text-right {
+  text-align: right; }
+
+.text-center {
+  text-align: center; }
+
+.text-justify {
+  text-align: justify; }
+
+@media (max-width: 769px) {
+  .text-right-max-xs {
+    text-align: right; } }
+
+@media (min-width: 770px) {
+  .text-right-min-sm {
+    text-align: right; } }
+
+.text-light {
+  font-weight: lighter; }
+
+.text-normal {
+  font-weight: normal; }
+
+.text-strong {
+  font-weight: bold; }
+
+.text-capitalise {
+  text-transform: capitalize; }
+
+.text-linethrough {
+  text-decoration: line-through; }
+
+.keyline-top {
+  border-top: 1px solid #eaeaea; }
+
+.keyline-bottom {
+  border-bottom: 1px solid #eaeaea; }
+
+.keyline-right {
+  border-right: 1px solid #eaeaea; }
+
+.keyline-left {
+  border-left: 1px solid #eaeaea; }
+
+.zero-keyline {
+  border: 0 !important; }
+
+.zero-keyline-top {
+  border-top: none !important; }
+
+.zero-keyline-bottom {
+  border-bottom: none !important; }
+
+.zero-keyline-right {
+  border-right: none !important; }
+
+.zero-keyline-left {
+  border-left: none !important; }
+
+.no-select {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+.no-decoration:hover, .no-decoration:focus {
+  text-decoration: none; }
+
+.no-interaction:hover, .no-interaction:focus {
+  color: inherit !important; }

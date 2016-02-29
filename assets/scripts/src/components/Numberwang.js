@@ -8,6 +8,7 @@ import utils from '../libs/utils';
 import { merge } from 'lodash/object';
 
 // Components
+import StartScreen from './StartScreen';
 import NumberArea from './NumberArea';
 import ScoreBoard from './ScoreBoard';
 import ModeSwitcher from './ModeSwitcher';
@@ -17,8 +18,6 @@ import GameControls from './GameControls';
 import { EN, DE } from '../config/languages';
 import { modes } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
-
-let remainingTimer = null;
 
 const REMAINING_TIME = 60000;
 const DEFAULT_STATE = {
@@ -31,6 +30,7 @@ const DEFAULT_STATE = {
     numbers: [],
     mute: false,
     remainingTime: REMAINING_TIME,
+    gameStarted: false,
     controls: []
 }
 
@@ -49,7 +49,33 @@ class Numberwang extends Component {
     }
 
     componentDidMount() {
+        this.endGame();
+    };
+
+    componentWillUnmount() {
+        clearInterval(this.remainingTimer).bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        localStorage.NumberwangState = JSON.stringify(this.state);
+    };
+
+    startTimer = () => {
+        this.remainingTimer = setInterval(() => {
+            let remainingTime = this.state.remainingTime - 1000;
+            if(remainingTime < 0) {
+                this.endGame();
+            } else {
+                this.setState({
+                    remainingTime
+                })
+            }
+        }, 1000);
+    };
+
+    startGame = () => {
         let controls = [
+            { name: 'End', action: this.endGame, active: true },
             { name: 'Restart', action: this.restartGame, active: true },
             { name: 'Mute', action: this.toggleGameAudio, active: true },
             { name: 'Unmute', action: this.toggleGameAudio, active: false }
@@ -67,7 +93,8 @@ class Numberwang extends Component {
             answerAttempts: 0,
             currentNumber: numbers[0],
             numbers,
-            controls
+            controls,
+            gameStarted: true
         }
 
         return this.setState(newState, () => {
@@ -75,41 +102,40 @@ class Numberwang extends Component {
         });
     };
 
-    componentDidUpdate(prevProps, prevState) {
-        localStorage.NumberwangState = JSON.stringify(this.state);
-    };
+    endGame = () => {
+        let newState = {
+            gameStarted: false,
+            answerAttempts: 0,
+            score: 0,
+            currentNumber: [],
+            remainingTime: REMAINING_TIME
+        };
 
-    startTimer = () => {
-        remainingTimer = setInterval(() => {
-            let remainingTime = this.state.remainingTime - 1000;
-            if(remainingTime < 0) {
-                this.restartGame();
-            } else {
-                this.setState({
-                    remainingTime
-                })
-            }
-        }, 1000);
+        clearInterval(this.remainingTimer);
+        this.setState(newState);
     };
 
     restartGame = () => {
+        let numbers = this.getNewNumbers(1);
+
         let newState = {
             answerAttempts: 0,
             score: 0,
-            numbers: this.getNewNumbers(1),
+            numbers,
+            currentNumber: numbers[0],
             remainingTime: REMAINING_TIME
-        }
+        };
 
         localStorage.removeItem('NumberwangState');
-        clearInterval(remainingTimer);
+        clearInterval(this.remainingTimer);
         this.setState(newState, () => {
             this.startTimer();
         });
     };
 
     toggleGameAudio = () => {
-        console.log(controls);
         let controls = [
+            { name: 'End', action: this.endGame, active: true },
             { name: 'Restart', action: this.restartGame, active: true },
             { name: 'Mute', action: this.toggleGameAudio, active: this.state.mute ? true : false },
             { name: 'Unmute', action: this.toggleGameAudio, active: this.state.mute ? false : true }
@@ -128,12 +154,11 @@ class Numberwang extends Component {
             currentMode: newMode[0],
         }
 
-        let numbers = this.getNewNumbers(1);
-
         this.setState(newState, function(){
+            let numbers = this.getNewNumbers(1);
             return this.setState({
-                currentNumber: numbers[0],
                 numbers,
+                currentNumber: numbers[0]
             })
         });
     };
@@ -306,18 +331,20 @@ class Numberwang extends Component {
     render() {
         return (
             <numberwang className="window">
-                <header className="header">
-                    <ScoreBoard score={ this.state.score } personalBest={ this.state.personalBest } timer={ this.state.remainingTime } />
-                    <GameControls controls={ this.state.controls } />
-                    <ModeSwitcher modes={ this.state.modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
-                </header>
-                {
-                    this.state.numbers.map(function(number) {
-                        return (
-                            <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } key={ number.id } number={ number } cheatMode={ this.props.cheatMode }/>
-                        ) 
-                    }, this)
-                }
+                {(!this.state.gameStarted) && (
+                    <StartScreen personalBest={ this.state.personalBest } startGame={ this.startGame } />
+                )}
+
+                {(this.state.gameStarted) && (
+                    <div>
+                        <header className="header">
+                            <ScoreBoard score={ this.state.score } personalBest={ this.state.personalBest } timer={ this.state.remainingTime } />
+                            <GameControls controls={ this.state.controls } />
+                            <ModeSwitcher modes={ this.state.modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
+                        </header>
+                        <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber } cheatMode={ this.props.cheatMode }/>
+                    </div>
+                )}
             </numberwang>
         );
     };
