@@ -9,7 +9,8 @@
     "css:build": "npm run css:sass -s && npm run css:prefix -s && npm run css:min -s",
     "css:sass": "node-sass --include-path scss assets/styles/scss/main.scss assets/styles/css/main.css",
     "css:prefix": "postcss --use autoprefixer -b 'last 2 versions' assets/styles/css/*.css -d assets/styles/css/",
-    "css:min": "csso assets/styles/css/main.css assets/styles/css/main.min.css"
+    "css:min": "csso assets/styles/css/main.css assets/styles/css/main.min.css",
+    "js:build": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",

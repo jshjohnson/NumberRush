@@ -1,6 +1,5 @@
 // React
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 // Utilities
 import RandomString from 'randomstring';
