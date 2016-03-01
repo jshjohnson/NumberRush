@@ -22,11 +22,18 @@ module.exports = {
         warnings: false,
         screw_ie8: true
       }
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        // This has effect on the react lib size
+        'NODE_ENV': JSON.stringify('production'),
+      }
+    }),
   ],
   module: {
     loaders: [{
       test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
       loaders: ['babel'],
       include: path.join(__dirname, 'assets/scripts/src')
     }]

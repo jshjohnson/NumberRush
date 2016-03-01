@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 
 // Utilities
-import RandomString from 'randomstring';
-import utils from '../libs/utils';
-import { merge } from 'lodash/object';
+import { capitalise } from '../libs/utils';
+import merge from 'lodash/object/merge';
 
 // Components
 import StartScreen from './StartScreen';
@@ -244,10 +243,9 @@ class Numberwang extends Component {
                 // If number doesn't already exist in numbers array
                 if(numbers.indexOf(number) === -1) {
                     numbers.push({
-                        id: RandomString.generate(6),
                         digits: number,
-                        questionLanguage: utils.capitalise(this.translateNumber(number, EN, 'forwards', true)),
-                        answerLanguage: utils.capitalise(this.translateNumber(number, DE, 'backwards', false)),
+                        questionLanguage: capitalise(this.translateNumber(number, EN, 'forwards', true)),
+                        answerLanguage: capitalise(this.translateNumber(number, DE, 'backwards', false)),
                     });
 
                     numberCount++;
