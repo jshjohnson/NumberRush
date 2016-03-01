@@ -282,4 +282,4 @@ export let stripHTML = function(html) {
    let el = document.createElement("DIV");
    el.innerHTML = html;
    return el.textContent || el.innerText || "";
-}
+};

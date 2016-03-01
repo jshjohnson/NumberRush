@@ -39,6 +39,7 @@
     "babel-preset-react": "^6.0.15",
     "babel-preset-stage-0": "^6.0.15",
     "classnames": "^2.2.3",
+    "csso": "^1.6.4",
     "eslint-plugin-react": "^3.6.2",
     "lodash": "^4.5.1",
     "node-sass": "^3.4.2",

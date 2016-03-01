@@ -1,0 +1,13 @@
+/**
+ * Animations
+ */
+
+@keyframes flashText {
+    0% { color: $brand-white; }
+    50% { color: $brand-secondary; }
+    100% { color: $brand-white; }
+}
+
+.flash-text {
+    animation: flashText 1s infinite ease-in-out;
+}

@@ -8,8 +8,8 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, '/assets/scripts/dist'),
-    filename: 'bundle.min.js',
-    publicPath: '/static/'
+    filename: 'bundle.js',
+    publicPath: '/assets/scripts/dist/'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({

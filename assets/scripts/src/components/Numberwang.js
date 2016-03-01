@@ -264,14 +264,8 @@ class Numberwang extends Component {
     };
 
     handleSuccess = (answer) => {
-        let numbers = this.state.numbers;
-        let answerIndex = numbers.indexOf(answer);
-        let newNumbers = this.getNewNumbers(1);
-
-        // Remove correct answer 
-        numbers.splice(answerIndex, 1);
-        // Add new question
-        numbers.push(newNumbers[0]);
+        // Get new numbers
+        let numbers = this.getNewNumbers(1);
         // Increment score 
         let score = this.state.score + this.state.currentMode.multiplier;
         // Increment timer
@@ -280,7 +274,7 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let audio = new Audio('../../assets/audio/correct.mp3');
+            let audio = new Audio('../../assets/audio/correct-1.mp3');
             audio.play();
         }
 
@@ -301,7 +295,7 @@ class Numberwang extends Component {
         });
 
         if(!this.state.mute) {
-            let audio = new Audio('../../assets/audio/incorrect.mp3');
+            let audio = new Audio('../../assets/audio/incorrect-1.mp3');
             audio.play();
         }
     };

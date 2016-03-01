@@ -23,7 +23,8 @@ class NumberArea extends Component {
     };
 
     render() { 
-        var areaClass = classNames({
+        let { number, answerAttempts } = this.props;
+        let areaClass = classNames({
             'window__area': true,
             'window__area--active': !this.props.areaDisabled,
             'window__area--disabled': this.props.areaDisabled 
@@ -32,14 +33,11 @@ class NumberArea extends Component {
             <div className={ areaClass }>
                 <div className="window__outer">
                     <div className="window__inner">
-                        <h2 className="window__focus zero-bottom">{ this.props.number.digits }</h2>
-                        <p>{ this.props.number.questionLanguage }</p>
-                        { this.props.answerAttempts >= 5 &&
-                            <p><strong>Clue:</strong> { this.props.number.answerLanguage }</p>
+                        <h2 className="window__focus zero-bottom">{ number.digits }</h2>
+                        <p>{ number.questionLanguage }</p>
+                        { answerAttempts >= 5 &&
+                            <p><strong>Clue:</strong> { number.answerLanguage }</p>
                         }
-                        { this.props.cheatMode &&
-                            <p>{ this.props.number.answerLanguage }</p>
-                        } 
                         <input ref="input" type="text" className="window__form-control" onKeyUp={ this.handleKeyUp } autofocus></input>
                     </div>
                 </div>

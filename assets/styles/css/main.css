@@ -426,7 +426,7 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.4;
   margin-top: 0;
   margin-bottom: 1.6rem; }
@@ -621,7 +621,8 @@ ol {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1; }
+  z-index: 1;
+  will-change: transform; }
 
 /**
  * Window
@@ -702,6 +703,28 @@ ol {
   border-left: 1px solid #21323b; }
   .window__input--btn:focus {
     outline: 0; }
+
+/**
+ * Animations
+ */
+@-webkit-keyframes flashText {
+  0% {
+    color: #fff; }
+  50% {
+    color: #E5424E; }
+  100% {
+    color: #fff; } }
+@keyframes flashText {
+  0% {
+    color: #fff; }
+  50% {
+    color: #E5424E; }
+  100% {
+    color: #fff; } }
+
+.flash-text {
+  -webkit-animation: flashText 1s infinite ease-in-out;
+          animation: flashText 1s infinite ease-in-out; }
 
 .disabled, .is-disabled, fieldset[disabled] {
   cursor: not-allowed; }
