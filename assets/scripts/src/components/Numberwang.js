@@ -50,10 +50,6 @@ class Numberwang extends Component {
         this.endGame();
     };
 
-    componentWillUnmount() {
-        clearInterval(this.remainingTimer).bind(this);
-    }
-
     componentDidUpdate(prevProps, prevState) {
         localStorage.NumberwangState = JSON.stringify(this.state);
     };
@@ -269,16 +265,20 @@ class Numberwang extends Component {
     };
 
     handleSuccess = (answer) => {
-        let numberArray = this.state.numbers;
-        let answerIndex = numberArray.indexOf(answer);
-        let newNumber = this.getNewNumbers(1);
+        let numbers = this.state.numbers;
+        let answerIndex = numbers.indexOf(answer);
+        let newNumbers = this.getNewNumbers(1);
 
         // Remove correct answer 
-        numberArray.splice(answerIndex, 1);
+        numbers.splice(answerIndex, 1);
         // Add new question
-        numberArray.push(newNumber[0]);
+        numbers.push(newNumbers[0]);
         // Increment score 
         let score = this.state.score + this.state.currentMode.multiplier;
+        // Increment timer
+        let remainingTime = this.state.remainingTime + (this.state.currentMode.multiplier * 1000);
+
+        console.log(remainingTime);
 
         // If game hasn't been muted
         if(!this.state.mute) {
@@ -288,11 +288,12 @@ class Numberwang extends Component {
         }
 
         let newState = {
-            currentNumber: numberArray[0],
-            numbers: numberArray,
-            score: score,
             personalBest: score > this.state.personalBest ? score : this.state.personalBest,
-            answerAttempts: 0
+            answerAttempts: 0,
+            currentNumber: numbers[0],
+            numbers,
+            score,
+            remainingTime
         }
 
         // Update state

@@ -2,13 +2,13 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'false',
   entry: [
     './assets/scripts/src/index'
   ],
   output: {
     path: path.join(__dirname, '/assets/scripts/dist'),
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
     publicPath: '/static/'
   },
   plugins: [

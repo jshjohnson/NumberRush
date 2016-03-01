@@ -1,7 +1,7 @@
 {
   "name": "Numberwang",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "Number based game for learning German numbers",
   "scripts": {
     "start": "node server.js",
     "lint": "eslint ./assets/scripts/src",
@@ -10,11 +10,12 @@
     "css:sass": "node-sass --include-path scss assets/styles/scss/main.scss assets/styles/css/main.css",
     "css:prefix": "postcss --use autoprefixer -b 'last 2 versions' assets/styles/css/*.css -d assets/styles/css/",
     "css:min": "csso assets/styles/css/main.css assets/styles/css/main.min.css",
-    "js:build": "webpack --config webpack.config.prod.js"
+    "js:build": "webpack --config webpack.config.prod.js",
+    "js:anaylse": "webpack --config webpack.config.prod.js --json | webpack-bundle-size-analyzer"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-hot-boilerplate.git"
+    "url": "https://github.com/jshjohnson/Numberwang.git"
   },
   "keywords": [
     "react",
@@ -27,12 +28,8 @@
     "edit",
     "webpack"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Josh Johnson <josh@joshuajohnson.co.uk> (http://github.com/jshjohnson)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gaearon/react-hot-boilerplate/issues"
-  },
-  "homepage": "https://github.com/gaearon/react-hot-boilerplate",
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "babel-core": "^6.0.20",
@@ -43,14 +40,15 @@
     "babel-preset-stage-0": "^6.0.15",
     "classnames": "^2.2.3",
     "eslint-plugin-react": "^3.6.2",
+    "lodash": "^4.5.1",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.0",
     "opn-cli": "^3.1.0",
     "postcss-cli": "^2.5.1",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.1",
-    "lodash": "^4.5.1"
+    "webpack-bundle-size-analyzer": "^2.0.1",
+    "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
     "react": "^0.14.0",
