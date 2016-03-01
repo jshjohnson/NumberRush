@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 // Utilities
 import { capitalise } from '../libs/utils';
-import merge from 'lodash/object/merge';
+import merge from 'lodash/merge';
 
 // Components
 import StartScreen from './StartScreen';

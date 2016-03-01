@@ -77,6 +77,6 @@ $window-focus-font-size: 20rem;
     background-color: transparent;
     border: none;
     padding: 0 $global-guttering;
-    border-left: 1px solid white;
+    border-left: 1px solid darken($brand-primary, 10%);
     &:focus { outline: 0; }
 }
