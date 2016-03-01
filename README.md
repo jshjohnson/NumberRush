@@ -13,3 +13,6 @@ I'm new to React so any performance improvements that can be made will be apprec
 ###To do:
 * Webpack production config
 * Experiment with Redux/Flux for state handling 
+
+####Oh, for anyone wondering
+https://www.youtube.com/watch?v=zJDu5D_IXbc
