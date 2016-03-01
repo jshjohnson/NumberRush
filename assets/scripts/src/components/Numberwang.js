@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Utilities
-import { capitalise } from '../libs/utils';
+import { capitalise, stripHTML } from '../libs/utils';
 import merge from 'lodash/merge';
 
 // Components
@@ -17,15 +17,14 @@ import { EN, DE } from '../config/languages';
 import { modes } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
 
-const REMAINING_TIME = 60000;
+const REMAINING_TIME = 45000;
 const DEFAULT_STATE = {
-    modes: modes,
     currentMode: modes[0],
     answerAttempts: 0,
     score: 0,
+    previousScore: 0,
     personalBest: 0,
     currentNumber: [],
-    numbers: [],
     mute: false,
     remainingTime: REMAINING_TIME,
     gameStarted: false,
@@ -86,13 +85,12 @@ class Numberwang extends Component {
         let newState = {
             answerAttempts: 0,
             currentNumber: numbers[0],
-            numbers,
             controls,
             gameStarted: true
         }
 
         return this.setState(newState, () => {
-           return this.startTimer(); 
+           this.startTimer(); 
         });
     };
 
@@ -100,6 +98,7 @@ class Numberwang extends Component {
         let newState = {
             gameStarted: false,
             answerAttempts: 0,
+            previousScore: this.state.score,
             score: 0,
             currentNumber: [],
             remainingTime: REMAINING_TIME
@@ -114,8 +113,8 @@ class Numberwang extends Component {
 
         let newState = {
             answerAttempts: 0,
+            previousScore: this.state.score,
             score: 0,
-            numbers,
             currentNumber: numbers[0],
             remainingTime: REMAINING_TIME
         };
@@ -151,14 +150,13 @@ class Numberwang extends Component {
         this.setState(newState, function(){
             let numbers = this.getNewNumbers(1);
             return this.setState({
-                numbers,
                 currentNumber: numbers[0]
             })
         });
     };
 
     handleGameModeChange = (event) => {
-        let selectedMode = this.state.modes.filter(function(mode) {
+        let selectedMode = modes.filter(function(mode) {
             return mode.name == event.currentTarget.value;
         });
 
@@ -237,6 +235,7 @@ class Numberwang extends Component {
                 let number = getRandomNumber(1, numberRange);
 
                 // If number doesn't already exist in numbers array
+                // otherwise get a new one
                 if(numbers.indexOf(number) === -1) {
                     numbers.push({
                         digits: number,
@@ -278,8 +277,6 @@ class Numberwang extends Component {
         // Increment timer
         let remainingTime = this.state.remainingTime + (this.state.currentMode.multiplier * 1000);
 
-        console.log(remainingTime);
-
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
@@ -291,12 +288,10 @@ class Numberwang extends Component {
             personalBest: score > this.state.personalBest ? score : this.state.personalBest,
             answerAttempts: 0,
             currentNumber: numbers[0],
-            numbers,
             score,
             remainingTime
         }
 
-        // Update state
         return this.setState(newState);
     };
 
@@ -319,7 +314,8 @@ class Numberwang extends Component {
     };
 
     answer = (response, answer) => {
-        if (this.isCorrect(response, answer)) {
+        let responseSanitised = stripHTML(response);
+        if (this.isCorrect(responseSanitised, answer)) {
             this.handleSuccess(answer);
         } else if(response) {
             this.handleFailure();
@@ -330,7 +326,7 @@ class Numberwang extends Component {
         return (
             <numberwang className="window">
                 {(!this.state.gameStarted) && (
-                    <StartScreen personalBest={ this.state.personalBest } startGame={ this.startGame } />
+                    <StartScreen previousScore={ this.state.previousScore } personalBest={ this.state.personalBest } startGame={ this.startGame } />
                 )}
 
                 {(this.state.gameStarted) && (
@@ -338,9 +334,9 @@ class Numberwang extends Component {
                         <header className="header">
                             <ScoreBoard score={ this.state.score } personalBest={ this.state.personalBest } timer={ this.state.remainingTime } />
                             <GameControls controls={ this.state.controls } />
-                            <ModeSwitcher modes={ this.state.modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
+                            <ModeSwitcher modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
                         </header>
-                        <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber } cheatMode={ this.props.cheatMode }/>
+                        <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
                     </div>
                 )}
             </numberwang>

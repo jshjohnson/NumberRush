@@ -272,3 +272,14 @@ export let isInView = function(el, position, offset) {
     // If the user has scrolled further than the distance from the element to the top of its parent
     return this.getScrollPosition(position) > (this.getElemDistance(el) + this.getElementOffset(el, offset)) ? true : false;
 };
+
+/**
+ * Remove html tags from a string
+ * @param  {String}  Initial string/html
+ * @return {String}  Sanitised string
+ */
+export let stripHTML = function(html) {
+   let el = document.createElement("DIV");
+   el.innerHTML = html;
+   return el.textContent || el.innerText || "";
+}
