@@ -17,7 +17,7 @@ import { EN, DE } from '../config/languages';
 import { modes } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
 
-const REMAINING_TIME = 45000;
+const REMAINING_TIME = 10000;
 const DEFAULT_STATE = {
     currentMode: modes[0],
     answerAttempts: 0,
@@ -56,6 +56,10 @@ class Numberwang extends Component {
     startTimer = () => {
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
+            let audio = new Audio('../../assets/audio/tick.mp3');
+            if(remainingTime === 5000 && !this.state.mute) {
+                audio.play();
+            }
             if(remainingTime < 0) {
                 this.endGame();
             } else {
@@ -96,8 +100,6 @@ class Numberwang extends Component {
     };
 
     endGame = () => {
-        console.log(this.state.score);
-
         let newState = {
             gameStarted: false,
             previousScore: this.state.score,
