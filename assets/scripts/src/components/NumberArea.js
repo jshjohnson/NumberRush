@@ -16,6 +16,17 @@ class NumberArea extends Component {
         }
     };
 
+    createClue = (string, percent = 0.4) => {
+        let strArr = string.split('');
+        let charCount = Math.floor(strArr.length * percent);
+
+        let clueString = strArr.filter(function(val, index){
+            return (index < charCount) ? true : false; 
+        }).join('');
+
+        return clueString + '...';
+    };
+
     handleKeyUp = (event) => {
         if(event.which == 13) {
             this.props.answer(event.currentTarget.value, this.props.number);
@@ -35,8 +46,8 @@ class NumberArea extends Component {
                     <div className="window__inner">
                         <h2 className="window__focus zero-bottom">{ number.digits }</h2>
                         <p>{ number.questionLanguage }</p>
-                        { answerAttempts >= 5 &&
-                            <p><strong>Clue:</strong> { number.answerLanguage }</p>
+                        { answerAttempts >= 3 &&
+                            <p><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
                         }
                         <input ref="input" type="text" className="window__form-control" onKeyUp={ this.handleKeyUp } autofocus></input>
                     </div>
