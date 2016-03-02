@@ -150,7 +150,8 @@ class Numberwang extends Component {
         this.setState(newState, function(){
             let numbers = this.getNewNumbers(1);
             return this.setState({
-                currentNumber: numbers[0]
+                currentNumber: numbers[0],
+                answerAttempts: 0
             })
         });
     };
