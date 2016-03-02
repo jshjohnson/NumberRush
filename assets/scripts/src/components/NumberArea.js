@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import ScoreBoard from './ScoreBoard';
 
 import classNames from 'classnames';
 
@@ -41,15 +42,23 @@ class NumberArea extends Component {
             'window__area--disabled': this.props.areaDisabled 
         });
         return (
+            
             <div className={ areaClass }>
-                <div className="window__outer">
-                    <div className="window__inner">
-                        <h2 className="window__focus zero-bottom">{ number.digits }</h2>
-                        <p>{ number.questionLanguage }</p>
-                        { answerAttempts >= 3 &&
-                            <p><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
-                        }
-                        <input ref="input" type="text" className="window__form-control" onKeyUp={ this.handleKeyUp } autofocus></input>
+                <div className="window__container">
+                    <div className="window__outer">
+                        <div className="window__inner">
+                            <ScoreBoard score={ this.props.score } personalBest={ this.props.personalBest } timer={ this.props.remainingTime } />
+                            <div className="bubble bubble--lg bubble--focus">
+                                <div className="bubble__inner bubble__inner--pad">
+                                    { answerAttempts >= 3 &&
+                                        <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
+                                    }
+                                    <h2 className="bubble__title zero-bottom">{ number.digits }</h2>
+                                    <p className="bubble__desc bubble__desc--offset-bottom bubble__desc--constrained">{ number.questionLanguage }</p>
+                                </div>
+                            </div>
+                            <input ref="input" type="text" className="window__form-control" onKeyUp={ this.handleKeyUp } autofocus></input>
+                        </div>
                     </div>
                 </div>
             </div>

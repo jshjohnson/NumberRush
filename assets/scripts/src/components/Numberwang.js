@@ -17,7 +17,7 @@ import { EN, DE } from '../config/languages';
 import { modes } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
 
-const REMAINING_TIME = 10000;
+const REMAINING_TIME = 600000;
 const DEFAULT_STATE = {
     currentMode: modes[0],
     answerAttempts: 0,
@@ -329,11 +329,10 @@ class Numberwang extends Component {
                 {(this.state.gameStarted) && (
                     <div>
                         <header className="header">
-                            <ScoreBoard score={ this.state.score } personalBest={ this.state.personalBest } timer={ this.state.remainingTime } />
                             <GameControls controls={ this.state.controls } />
                             <ModeSwitcher modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
                         </header>
-                        <NumberArea answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
+                        <NumberArea score={ this.state.score } personalBest={ this.state.personalBest } remainingTime={ this.state.remainingTime } answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
                     </div>
                 )}
             </numberwang>

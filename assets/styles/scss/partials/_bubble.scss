@@ -1,0 +1,147 @@
+/**
+ * Bubble
+ */
+
+.bubble {
+    display: table;
+    margin: auto;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.8rem;
+    &:before, &:after {
+        content: "";
+        position: absolute;
+    }
+    &:before {
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(ellipse at 50% 0%, transparent, rgba($brand-black, 0.1));
+        background-image: linear-gradient(to bottom, rgba($brand-black, 0) 0%, rgba($brand-black,0.1) 85%);
+        bottom: 2.5%;
+        border-radius: 50%;
+    }
+    &:after {
+        top: 5px;
+        width: 55%;
+        height: 30%;
+        background-image: linear-gradient(to bottom, rgba($brand-white, .5) 0%, rgba($brand-white, 0) 80%);
+        left: 22.5%;
+        border-radius: 50%;
+    }
+    @include guttering;
+}
+
+.bubble--lg {
+    width: 40rem;
+    height: 40rem;
+    .bubble__desc { font-size: 1.6rem; }
+    @include respond-max($global-screen-sm) {
+        width: 30rem;
+        height: 30rem;
+        .bubble__desc { font-size: 1.4rem; }
+    }
+}
+
+.bubble--sm {
+    width: 10rem;
+    height: 10rem;
+    font-size: 2.2rem;
+    animation: bounceIn 1s linear;
+    &:before { bottom: 5%; }
+    &:after { top: 2.5px; }
+    .bubble__desc { font-size: 1.4rem; }
+    @include respond-max($global-screen-sm) {
+        width: 8rem;
+        height: 8rem;
+        font-size: 1.8rem;
+        .bubble__desc { font-size: 1.2rem; }
+    }
+}
+
+.bubble--timer {
+    background-color: #E22617;
+    position: absolute;
+    right: 18%;
+    @include respond-max($global-screen-sm) {
+        right: 22%;
+    }
+    @include respond-max($global-screen-xs) {
+        right: 12%;
+    }
+}
+
+.bubble--score {
+    background-color: #00AF16;
+    position: absolute;
+    left: 22.5%;
+    margin-top: -5%;
+    @include respond-max($global-screen-sm) {
+        left: 30%;
+        top: 24%;
+    }
+    @include respond-max($global-screen-xs) {
+        left: 20%;
+    }
+}
+
+.bubble--personalbest {
+    background-color: #E91E63;
+    position: absolute;
+    left: 12%;
+    top: 22.5%;
+    @include respond-max($global-screen-sm) {
+        left: 18%;
+        top: 24%;
+    }
+    @include respond-max($global-screen-xs) {
+        left: 10%;
+        top: 28%;
+    }
+}
+
+.bubble--focus {
+    background-color: #0068DC;
+    z-index: -1;
+}
+
+.bubble__inner { 
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.bubble__inner--pad { padding: $global-guttering; }
+
+.bubble__title {
+    line-height: 1;
+    -webkit-appearance: none;
+    border: 0;
+    background-color: transparent;
+    font-size: 12rem;
+    font-weight: bold;
+    color: $brand-white;
+    margin: auto;
+    @include respond-max($global-screen-sm) { font-size: 8rem; }
+}
+
+.bubble__desc { 
+    line-height: 1.4;
+    margin-bottom: 0; 
+}
+
+.bubble__desc--offset-top {
+    position: absolute;
+    top: 20%;
+}
+.bubble__desc--offset-bottom {
+    position: absolute;
+    top: 70%;
+}
+
+.bubble__desc--constrained {
+    position: absolute;
+    width: 60%;
+    margin: auto;
+    display: block;
+    left: 20%;
+} 

@@ -417,7 +417,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 1.6rem;
   overflow-x: hidden;
-  background-color: #293e4a;
+  background-color: #1b1b1b;
   color: #fff; }
   @media (max-width: 769px) {
     body {
@@ -614,7 +614,7 @@ ol {
  */
 .header {
   height: 50px;
-  background-color: #334D5C;
+  background-color: #222;
   text-align: center;
   line-height: 50px;
   position: fixed;
@@ -627,6 +627,11 @@ ol {
 /**
  * Window
  */
+.window__container {
+  position: relative;
+  max-width: 40em;
+  margin: auto; }
+
 .window__area {
   position: relative;
   display: inline-block;
@@ -668,9 +673,15 @@ ol {
   -webkit-appearance: none;
   background-color: transparent;
   border: none;
-  padding: 1.2rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 250px; }
+  padding: 1.2rem 2.4rem;
+  background-color: #fff;
+  width: 250px;
+  border-radius: 10em;
+  margin-top: 5rem;
+  color: #222;
+  box-shadow: 0px 0px 100px 5px rgba(255, 255, 255, 0.25); }
+  .window__form-control:focus {
+    outline: none; }
 
 .window__input--absolute {
   top: 50%;
@@ -700,13 +711,234 @@ ol {
   background-color: transparent;
   border: none;
   padding: 0 2.4rem;
-  border-left: 1px solid #21323b; }
+  border-left: 1px solid #090909; }
   .window__input--btn:focus {
     outline: 0; }
 
 /**
+ * Bubble
+ */
+.bubble {
+  display: table;
+  margin: auto;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  font-size: 1.8rem; }
+  .bubble:before, .bubble:after {
+    content: "";
+    position: absolute; }
+  .bubble:before {
+    width: 100%;
+    height: 100%;
+    background-image: -webkit-radial-gradient(50% 0%, ellipse, transparent, rgba(0, 0, 0, 0.1));
+    background-image: radial-gradient(ellipse at 50% 0%, transparent, rgba(0, 0, 0, 0.1));
+    background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.1) 85%);
+    background-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.1) 85%);
+    bottom: 2.5%;
+    border-radius: 50%; }
+  .bubble:after {
+    top: 5px;
+    width: 55%;
+    height: 30%;
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
+    left: 22.5%;
+    border-radius: 50%; }
+  .bubble > *:last-child,
+  .bubble > *:last-child > *:last-child,
+  .bubble > *:last-child > *:last-child > *:last-child {
+    margin-bottom: 0; }
+
+.bubble--lg {
+  width: 40rem;
+  height: 40rem; }
+  .bubble--lg .bubble__desc {
+    font-size: 1.6rem; }
+  @media (max-width: 769px) {
+    .bubble--lg {
+      width: 30rem;
+      height: 30rem; }
+      .bubble--lg .bubble__desc {
+        font-size: 1.4rem; } }
+
+.bubble--sm {
+  width: 10rem;
+  height: 10rem;
+  font-size: 2.2rem;
+  -webkit-animation: bounceIn 1s linear;
+          animation: bounceIn 1s linear; }
+  .bubble--sm:before {
+    bottom: 5%; }
+  .bubble--sm:after {
+    top: 2.5px; }
+  .bubble--sm .bubble__desc {
+    font-size: 1.4rem; }
+  @media (max-width: 769px) {
+    .bubble--sm {
+      width: 8rem;
+      height: 8rem;
+      font-size: 1.8rem; }
+      .bubble--sm .bubble__desc {
+        font-size: 1.2rem; } }
+
+.bubble--timer {
+  background-color: #E22617;
+  position: absolute;
+  right: 18%; }
+  @media (max-width: 769px) {
+    .bubble--timer {
+      right: 22%; } }
+  @media (max-width: 479px) {
+    .bubble--timer {
+      right: 12%; } }
+
+.bubble--score {
+  background-color: #00AF16;
+  position: absolute;
+  left: 22.5%;
+  margin-top: -5%; }
+  @media (max-width: 769px) {
+    .bubble--score {
+      left: 30%;
+      top: 24%; } }
+  @media (max-width: 479px) {
+    .bubble--score {
+      left: 20%; } }
+
+.bubble--personalbest {
+  background-color: #E91E63;
+  position: absolute;
+  left: 12%;
+  top: 22.5%; }
+  @media (max-width: 769px) {
+    .bubble--personalbest {
+      left: 18%;
+      top: 24%; } }
+  @media (max-width: 479px) {
+    .bubble--personalbest {
+      left: 10%;
+      top: 28%; } }
+
+.bubble--focus {
+  background-color: #0068DC;
+  z-index: -1; }
+
+.bubble__inner {
+  display: table-cell;
+  vertical-align: middle; }
+
+.bubble__inner--pad {
+  padding: 2.4rem; }
+
+.bubble__title {
+  line-height: 1;
+  -webkit-appearance: none;
+  border: 0;
+  background-color: transparent;
+  font-size: 12rem;
+  font-weight: bold;
+  color: #fff;
+  margin: auto; }
+  @media (max-width: 769px) {
+    .bubble__title {
+      font-size: 8rem; } }
+
+.bubble__desc {
+  line-height: 1.4;
+  margin-bottom: 0; }
+
+.bubble__desc--offset-top {
+  position: absolute;
+  top: 20%; }
+
+.bubble__desc--offset-bottom {
+  position: absolute;
+  top: 70%; }
+
+.bubble__desc--constrained {
+  position: absolute;
+  width: 60%;
+  margin: auto;
+  display: block;
+  left: 20%; }
+
+/**
  * Animations
  */
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05); }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); } }
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); }
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05); }
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); } }
+
+@-webkit-keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3); }
+  20% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05); }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9); }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03); }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97); }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); } }
+
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+            transform: scale3d(0.3, 0.3, 0.3); }
+  20% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05); }
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+            transform: scale3d(0.9, 0.9, 0.9); }
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+            transform: scale3d(1.03, 1.03, 1.03); }
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+            transform: scale3d(0.97, 0.97, 0.97); }
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1); } }
+
 @-webkit-keyframes flashText {
   0% {
     color: #fff; }
@@ -714,6 +946,7 @@ ol {
     color: #E5424E; }
   100% {
     color: #fff; } }
+
 @keyframes flashText {
   0% {
     color: #fff; }
@@ -722,9 +955,17 @@ ol {
   100% {
     color: #fff; } }
 
+.pulse {
+  -webkit-animation: pulse 1s linear;
+          animation: pulse 1s linear; }
+
+.bounce-in {
+  -webkit-animation: bounceIn 1s linear;
+          animation: bounceIn 1s linear; }
+
 .flash-text {
-  -webkit-animation: flashText 1s infinite ease-in-out;
-          animation: flashText 1s infinite ease-in-out; }
+  -webkit-animation: flashText 1s infinite;
+          animation: flashText 1s infinite; }
 
 .disabled, .is-disabled, fieldset[disabled] {
   cursor: not-allowed; }
