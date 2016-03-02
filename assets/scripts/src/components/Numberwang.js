@@ -84,6 +84,7 @@ class Numberwang extends Component {
 
         let newState = {
             answerAttempts: 0,
+            score: 0,
             currentNumber: numbers[0],
             controls,
             gameStarted: true
@@ -95,11 +96,11 @@ class Numberwang extends Component {
     };
 
     endGame = () => {
+        console.log(this.state.score);
+
         let newState = {
             gameStarted: false,
-            answerAttempts: 0,
             previousScore: this.state.score,
-            score: 0,
             currentNumber: [],
             remainingTime: REMAINING_TIME
         };
@@ -275,7 +276,7 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let audio = new Audio('../../assets/audio/correct-1.mp3');
+            let audio = new Audio('../../assets/audio/success.mp3');
             audio.play();
         }
 
@@ -323,7 +324,6 @@ class Numberwang extends Component {
                 {(!this.state.gameStarted) && (
                     <StartScreen previousScore={ this.state.previousScore } personalBest={ this.state.personalBest } startGame={ this.startGame } />
                 )}
-
                 {(this.state.gameStarted) && (
                     <div>
                         <header className="header">
