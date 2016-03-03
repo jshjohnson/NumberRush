@@ -4,15 +4,13 @@ My first experimentation with React.js: A simple "against the clock" style numbe
 
 ##Development
 * Installation: `npm install`
-* Local server: `npm start`
+* Local server (& hot reloading): `npm start`
 * Styling: `npm run css:watch`
+* Scripts: `npm run js:build`
 
 ##Code review
-I'm new to React so any performance improvements that can be made will be appreciated as pull requests. All React-specific stuff is located in [`assets/scripts/src/`](https://github.com/jshjohnson/Numberwang/tree/develop/assets/scripts/src)
+I'm new to React so any performance improvements that can be made will be appreciated as pull requests. All React-specific stuff is located in [`assets/scripts/src/`](https://github.com/jshjohnson/NumberRush/tree/develop/assets/scripts/src)
 
 ###To do:
-* Webpack production config
+* Reduce overall file size (do we really need Lodash for one function?)
 * Experiment with Redux/Flux for state handling 
-
-####Oh, for anyone wondering
-https://www.youtube.com/watch?v=zJDu5D_IXbc
