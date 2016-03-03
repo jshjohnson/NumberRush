@@ -2,21 +2,13 @@
  * Animations
  */
 
- @keyframes pulse {
-   from {
-     transform: scale3d(1, 1, 1);
-   }
+@keyframes pulse {
+    from { transform: scale3d(1, 1, 1); }
+    50% { transform: scale3d(1.05, 1.05, 1.05); }
+    to { transform: scale3d(1, 1, 1); }
+}
 
-   50% {
-     transform: scale3d(1.05, 1.05, 1.05);
-   }
-
-   to {
-     transform: scale3d(1, 1, 1);
-   }
- }
-
- @keyframes bounceIn {
+@keyframes bounceIn {
     from, 20%, 40%, 60%, 80%, to { animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); }
 
     0% {
@@ -42,7 +34,7 @@
 
 @keyframes flashText {
     0% { color: $brand-white; }
-    50% { color: $brand-secondary; }
+    50% { color: rgba($brand-white, 0); }
     100% { color: $brand-white; }
 }
 

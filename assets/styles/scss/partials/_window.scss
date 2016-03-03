@@ -33,6 +33,7 @@ $window-focus-font-size: 20rem;
 .window__inner {
     display: table-cell;
     vertical-align: middle;
+    padding: 0 $global-guttering;
 }
 
 .window__focus {
@@ -68,16 +69,34 @@ $window-focus-font-size: 20rem;
 
 .window__form-control--wide { max-width: 320px; }
 
-.window__input--absolute {
-    top: 50%;
-    transform: translateY(-50%);
-    position: absolute;
-}
-
 .window__controls {
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.window__input {
+    text-overflow: '';
+    text-indent: 0.01px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+}
+
+.window__input--select {
+    background-position: right center;
+    background-size: 1rem;
+    background-image: url(../../images/arrow.svg);
+    background-repeat: no-repeat;
+    padding: 0 $global-guttering 0 $global-guttering/2;
+    &:focus { outline: none; }
+}
+
+.window__input--absolute {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
 }
 
 .window__input--left { right: 0; }
@@ -88,8 +107,6 @@ $window-focus-font-size: 20rem;
 
 .window__input--btn {
     color: white;
-    background-color: transparent;
-    border: none;
     padding: 0 $global-guttering;
     border-left: 1px solid darken($brand-primary, 10%);
     &:focus { outline: 0; }

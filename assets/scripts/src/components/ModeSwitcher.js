@@ -5,7 +5,7 @@ class ModeSwitcher extends Component {
         let { modes, changeMode, currentMode } = this.props;
         return (
             <modeswitcher>
-                <select className="window__input window__input--push-left window__input--absolute" onChange={ changeMode } value={ currentMode }>
+                <select className="window__input window__input--select window__input--push-left window__input--absolute" onChange={ changeMode } value={ currentMode }>
                    {
                         modes.map(function(mode) {
                             return (

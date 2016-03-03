@@ -21,7 +21,7 @@ class StartScreen extends Component {
                                     <li><h3><strong>Previous score:</strong> { previousScore }</h3></li>
                                 )}
                             </ul>
-                            <button className="push-top window__form-control" onClick={ startGame }>Start</button>
+                            <button className="bubble bubble--input window__form-control" onClick={ startGame }>Start</button>
                         </div>
                     </div>
                 </div>

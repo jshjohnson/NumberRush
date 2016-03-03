@@ -2,13 +2,21 @@
  * Bubble
  */
 
+$bubble-red: #EF2F2F;
+$bubble-pink: #e91e63;
+$bubble-green: #00af16;
+$bubble-blue: #1e88ff;
+
+$bubble-input-border-radius: 10rem;
+
 .bubble {
     display: table;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    font-size: 1.8rem;
+    font-size: $global-font-size-lg;
     will-change: transform;
     &:before, &:after {
         content: "";
@@ -36,11 +44,11 @@
 .bubble--lg {
     width: 40rem;
     height: 40rem;
-    .bubble__desc { font-size: 1.6rem; }
+    .bubble__desc { font-size: $global-font-size-base; }
     @include respond-max($global-screen-sm) {
-        width: 30rem;
-        height: 30rem;
-        .bubble__desc { font-size: 1.4rem; }
+        width: 25rem;
+        height: 25rem;
+        .bubble__desc { font-size: $global-font-size-sm; }
     }
 }
 
@@ -50,56 +58,67 @@
     font-size: 2.2rem;
     &:before { bottom: 5%; }
     &:after { top: 2.5px; }
-    .bubble__desc { font-size: 1.4rem; }
+    .bubble__desc { font-size: $global-font-size-sm; }
     @include respond-max($global-screen-sm) {
         width: 8rem;
         height: 8rem;
         font-size: 1.8rem;
-        .bubble__desc { font-size: 1.2rem; }
+        .bubble__desc { font-size: $global-font-size-xs; }
     }
 }
 
 .bubble--timer {
-    background-color: #E22617;
+    background-color: $bubble-red;
     position: absolute;
     right: 18%;
-    @include respond-max($global-screen-sm) {
-        right: 22%;
-    }
-    @include respond-max($global-screen-xs) {
-        right: 12%;
-    }
+    @include respond-max($global-screen-sm) { right: 22%; }
+    @include respond-max($global-screen-xs) { right: 18%; }
 }
 
 .bubble--score {
-    background-color: #00AF16;
+    background-color: $bubble-green;
     position: absolute;
     left: 22.5%;
     margin-top: -5%;
-    @include respond-max($global-screen-sm) {
-        left: 30%;
-    }
-    @include respond-max($global-screen-xs) {
-        left: 20%;
-    }
+    @include respond-max($global-screen-sm) { left: 30%; }
+    @include respond-max($global-screen-xs) { left: 20%; }
 }
 
 .bubble--personalbest {
-    background-color: #E91E63;
+    background-color: $bubble-pink;
     position: absolute;
     left: 12%;
     margin-top: $global-guttering;
-    @include respond-max($global-screen-sm) {
-        left: 18%;
-    }
-    @include respond-max($global-screen-xs) {
-        left: 6%;
-    }
+    @include respond-max($global-screen-sm) { left: 18%; }
+    @include respond-max($global-screen-xs) { left: 8%; }
 }
 
 .bubble--focus {
-    background-color: #0068DC;
+    background-color: $bubble-blue;
     z-index: -1;
+}
+
+.bubble--input {
+    padding: $global-guttering/2 $global-guttering/1.2;
+    -webkit-appearance: none;
+    background-color: $bubble-green;
+    color: $brand-white;
+    border: none;
+    border-radius: $bubble-input-border-radius;
+    &:before {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        border-radius: $bubble-input-border-radius;
+    }
+    &:after {
+        top: 2.5px;
+        width: 90%;
+        height: 20px;
+        background-image: linear-gradient(to bottom,rgba($brand-white,.5) 0%,rgba($brand-white,0) 80%);
+        left: 5%;
+        border-radius: $bubble-input-border-radius;
+    }
 }
 
 .bubble__inner { 
@@ -110,7 +129,7 @@
 .bubble__inner--pad { padding: $global-guttering; }
 
 .bubble__title {
-    line-height: 1;
+    line-height: $global-line-height-xxs;
     -webkit-appearance: none;
     border: 0;
     background-color: transparent;
@@ -124,7 +143,7 @@
 }
 
 .bubble__desc { 
-    line-height: 1.4;
+    line-height: $global-line-height-sm;
     margin-bottom: 0; 
 }
 
