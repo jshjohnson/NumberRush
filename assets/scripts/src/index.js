@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Numberwang from './components/Numberwang.js';
+import App from './components/App.js';
 
-ReactDOM.render(<Numberwang />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
