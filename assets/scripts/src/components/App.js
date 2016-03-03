@@ -324,7 +324,7 @@ class Numberwang extends Component {
                 )}
                 {(this.state.gameStarted) && (
                     <div>
-                        <header className="header">
+                        <header className="header fade-in">
                             <GameControls controls={ this.state.controls } />
                             <ModeSwitcher modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
                         </header>

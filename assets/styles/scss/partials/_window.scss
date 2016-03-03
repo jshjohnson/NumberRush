@@ -41,7 +41,6 @@ $window-focus-font-size: 20rem;
     border: 0;
     background-color: transparent;
     font-size: $window-focus-font-size;
-    font-weight: bold;
     color: white;
     margin: 0 auto $global-guttering;
     @include respond-max($global-screen-sm) { font-size: $window-focus-font-size/2; }
@@ -61,11 +60,12 @@ $window-focus-font-size: 20rem;
     width: 100%;
     max-width: 250px;
     border-radius: 10em;
-    margin-top: 5rem;
     color: $brand-primary;
     box-shadow: 0px 0px 100px 5px rgba($brand-white, .25);
     &:focus { outline: none; }
 }
+
+.window__form-control--push { margin: 5rem 0; }
 
 .window__form-control--wide { max-width: 320px; }
 

@@ -2,6 +2,12 @@
  * Animations
  */
 
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+
 @keyframes pulse {
     from { transform: scale3d(1, 1, 1); }
     50% { transform: scale3d(1.05, 1.05, 1.05); }
@@ -48,4 +54,8 @@
 
 .flash-text {
     animation: flashText 1s infinite;
+}
+
+.fade-in {
+    animation: fadeIn .25s linear;
 }

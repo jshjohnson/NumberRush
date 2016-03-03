@@ -88,6 +88,7 @@ a {
     text-decoration: none;
     transition: .15s color ease-in-out;
     color: $brand-link;
+    font-weight: bold;
     @include on-interaction { color: darken($brand-link, 5%);}
     &:hover { text-decoration: underline; }
 }

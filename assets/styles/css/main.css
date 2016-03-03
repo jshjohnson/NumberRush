@@ -487,9 +487,10 @@ a {
   text-decoration: none;
   -webkit-transition: .15s color ease-in-out;
   transition: .15s color ease-in-out;
-  color: #DA2A31; }
+  color: #fff;
+  font-weight: bold; }
   a:hover, a:active, a:focus {
-    color: #c82329; }
+    color: #f2f2f2; }
   a:hover {
     text-decoration: underline; }
 
@@ -657,7 +658,6 @@ ol {
   border: 0;
   background-color: transparent;
   font-size: 20rem;
-  font-weight: bold;
   color: white;
   margin: 0 auto 2.4rem; }
   @media (max-width: 769px) {
@@ -679,11 +679,13 @@ ol {
   width: 100%;
   max-width: 250px;
   border-radius: 10em;
-  margin-top: 5rem;
   color: #222;
   box-shadow: 0px 0px 100px 5px rgba(255, 255, 255, 0.25); }
   .window__form-control:focus {
     outline: none; }
+
+.window__form-control--push {
+  margin: 5rem 0; }
 
 .window__form-control--wide {
   max-width: 320px; }
@@ -844,7 +846,7 @@ ol {
 .bubble--input {
   padding: 1.2rem 2rem;
   -webkit-appearance: none;
-  background-color: #00af16;
+  background-color: #e91e63;
   color: #fff;
   border: none;
   border-radius: 10rem; }
@@ -906,6 +908,17 @@ ol {
 /**
  * Animations
  */
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
 @-webkit-keyframes pulse {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -916,6 +929,7 @@ ol {
   to {
     -webkit-transform: scale3d(1, 1, 1);
             transform: scale3d(1, 1, 1); } }
+
 @keyframes pulse {
   from {
     -webkit-transform: scale3d(1, 1, 1);
@@ -1006,6 +1020,10 @@ ol {
 .flash-text {
   -webkit-animation: flashText 1s infinite;
           animation: flashText 1s infinite; }
+
+.fade-in {
+  -webkit-animation: fadeIn .25s linear;
+          animation: fadeIn .25s linear; }
 
 .disabled, .is-disabled, fieldset[disabled] {
   cursor: not-allowed; }
