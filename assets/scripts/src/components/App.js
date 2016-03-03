@@ -56,10 +56,6 @@ class Numberwang extends Component {
     startTimer = () => {
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
-            if(remainingTime === 5000 && !this.state.mute) {
-                let audio = new Audio('../../assets/audio/tick.mp3');
-                audio.play();
-            }
             if(remainingTime < 0) {
                 this.endGame();
             } else {
@@ -278,7 +274,7 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let audio = new Audio('../../assets/audio/success.mp3');
+            let audio = new Audio('../assets/audio/success.mp3');
             audio.play();
         }
 
@@ -299,7 +295,7 @@ class Numberwang extends Component {
         });
 
         if(!this.state.mute) {
-            let audio = new Audio('../../assets/audio/incorrect-1.mp3');
+            let audio = new Audio('../assets/audio/incorrect-1.mp3');
             audio.play();
         }
     };
