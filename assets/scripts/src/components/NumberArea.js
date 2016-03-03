@@ -42,7 +42,6 @@ class NumberArea extends Component {
             'window__area--disabled': this.props.areaDisabled 
         });
         return (
-            
             <div className={ areaClass }>
                 <div className="window__container">
                     <div className="window__outer">
@@ -57,7 +56,7 @@ class NumberArea extends Component {
                                     <p className="bubble__desc bubble__desc--offset-bottom bubble__desc--constrained">{ number.questionLanguage }</p>
                                 </div>
                             </div>
-                            <input ref="input" type="text" className="window__form-control" onKeyUp={ this.handleKeyUp } autofocus></input>
+                            <input ref="input" type="text" className="window__form-control window__form-control--wide" onKeyUp={ this.handleKeyUp } placeholder="Translate the number above in German" autofocus></input>
                         </div>
                     </div>
                 </div>

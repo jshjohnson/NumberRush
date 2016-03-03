@@ -9,6 +9,7 @@
     position: relative;
     overflow: hidden;
     font-size: 1.8rem;
+    will-change: transform;
     &:before, &:after {
         content: "";
         position: absolute;
@@ -47,7 +48,6 @@
     width: 10rem;
     height: 10rem;
     font-size: 2.2rem;
-    animation: bounceIn 1s linear;
     &:before { bottom: 5%; }
     &:after { top: 2.5px; }
     .bubble__desc { font-size: 1.4rem; }
@@ -78,7 +78,6 @@
     margin-top: -5%;
     @include respond-max($global-screen-sm) {
         left: 30%;
-        top: 24%;
     }
     @include respond-max($global-screen-xs) {
         left: 20%;
@@ -89,14 +88,12 @@
     background-color: #E91E63;
     position: absolute;
     left: 12%;
-    top: 22.5%;
+    margin-top: $global-guttering;
     @include respond-max($global-screen-sm) {
         left: 18%;
-        top: 24%;
     }
     @include respond-max($global-screen-xs) {
-        left: 10%;
-        top: 28%;
+        left: 6%;
     }
 }
 
@@ -121,6 +118,8 @@
     font-weight: bold;
     color: $brand-white;
     margin: auto;
+    top: -.25rem;
+    position: relative;
     @include respond-max($global-screen-sm) { font-size: 8rem; }
 }
 

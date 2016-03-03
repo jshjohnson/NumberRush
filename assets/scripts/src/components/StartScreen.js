@@ -10,7 +10,9 @@ class StartScreen extends Component {
                 <div className="window__area">
                     <div className="window__outer">
                         <div className="window__inner">
-                            <h2 className="window__focus window__focus--sm">Numberwang</h2>
+                            <h1 className="window__focus window__focus--sm">Numberwang</h1>
+                            <h2>Aim of the game</h2>
+                            <p>Translate as many numbers as possible into German before the timer runs out!</p>
                             <ul className="list-inline">
                                 {(hasPersonalBest) && (
                                     <li><h3><strong>Personal best:</strong> { personalBest }</h3></li>

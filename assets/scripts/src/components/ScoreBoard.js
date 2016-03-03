@@ -5,20 +5,29 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 class ScoreBoard extends Component {
-    // componentWillReceiveProps(nextProps) {
-        
-    //     if(this.props.score != nextProps.score) {
-    //         let el = ReactDOM.findDOMNode(this.refs.score);
-    //         el.classList.add('pulse');
+    componentWillReceiveProps(nextProps) {
+        if(this.props.score != nextProps.score) {
+            let score = ReactDOM.findDOMNode(this.refs.score);
+            this.addAnimation(score, 'pulse');
+        }
 
-    //         var showEvent = whichAnimationEvent();
-    //         var showFunction = function(){
-    //             el.classList.remove('pulse');
-    //             el.removeEventListener(showEvent, showFunction, false);
-    //         };
-    //         el.addEventListener(showEvent, showFunction, false);
-    //     }
-    // };
+        if(this.props.personalBest != nextProps.personalBest) {
+            let personalBest = ReactDOM.findDOMNode(this.refs.personalBest);
+            this.addAnimation(personalBest, 'pulse');
+        }
+    };
+
+    addAnimation = (el, animation) => {
+        let animationEvent = whichAnimationEvent();
+
+        let removeAnimation = () => {
+            el.classList.remove(animation);
+            el.removeEventListener(animationEvent, removeAnimation, false);
+        };
+
+        el.classList.add(animation);
+        el.addEventListener(animationEvent, removeAnimation, false);
+    };
     
     render() {
         let { score, personalBest, timer } = this.props;
@@ -27,7 +36,7 @@ class ScoreBoard extends Component {
         });
         return (
             <scoreboard>
-                <div className="bubble bubble--sm bubble--personalbest">
+                <div ref="personalBest" className="bubble bubble--sm bubble--personalbest">
                     <div className="bubble__inner">
                         <h3 className="bubble__desc">Best</h3>
                         { personalBest }
@@ -39,7 +48,7 @@ class ScoreBoard extends Component {
                         { score }
                     </div>
                 </div>
-                <div className="bubble bubble--sm bubble--timer">
+                <div ref="timer" className="bubble bubble--sm bubble--timer">
                     <div className="bubble__inner">
                         <h3 className="bubble__desc">Timer</h3>
                         <span className={ timerClass }>{ timer / 1000 }s</span>

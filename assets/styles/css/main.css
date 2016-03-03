@@ -673,15 +673,19 @@ ol {
   -webkit-appearance: none;
   background-color: transparent;
   border: none;
-  padding: 1.2rem 2.4rem;
+  padding: 1.2rem 2rem;
   background-color: #fff;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   border-radius: 10em;
   margin-top: 5rem;
   color: #222;
   box-shadow: 0px 0px 100px 5px rgba(255, 255, 255, 0.25); }
   .window__form-control:focus {
     outline: none; }
+
+.window__form-control--wide {
+  max-width: 320px; }
 
 .window__input--absolute {
   top: 50%;
@@ -724,7 +728,8 @@ ol {
   border-radius: 50%;
   position: relative;
   overflow: hidden;
-  font-size: 1.8rem; }
+  font-size: 1.8rem;
+  will-change: transform; }
   .bubble:before, .bubble:after {
     content: "";
     position: absolute; }
@@ -765,9 +770,7 @@ ol {
 .bubble--sm {
   width: 10rem;
   height: 10rem;
-  font-size: 2.2rem;
-  -webkit-animation: bounceIn 1s linear;
-          animation: bounceIn 1s linear; }
+  font-size: 2.2rem; }
   .bubble--sm:before {
     bottom: 5%; }
   .bubble--sm:after {
@@ -800,8 +803,7 @@ ol {
   margin-top: -5%; }
   @media (max-width: 769px) {
     .bubble--score {
-      left: 30%;
-      top: 24%; } }
+      left: 30%; } }
   @media (max-width: 479px) {
     .bubble--score {
       left: 20%; } }
@@ -810,15 +812,13 @@ ol {
   background-color: #E91E63;
   position: absolute;
   left: 12%;
-  top: 22.5%; }
+  margin-top: 2.4rem; }
   @media (max-width: 769px) {
     .bubble--personalbest {
-      left: 18%;
-      top: 24%; } }
+      left: 18%; } }
   @media (max-width: 479px) {
     .bubble--personalbest {
-      left: 10%;
-      top: 28%; } }
+      left: 6%; } }
 
 .bubble--focus {
   background-color: #0068DC;
@@ -839,7 +839,9 @@ ol {
   font-size: 12rem;
   font-weight: bold;
   color: #fff;
-  margin: auto; }
+  margin: auto;
+  top: -.25rem;
+  position: relative; }
   @media (max-width: 769px) {
     .bubble__title {
       font-size: 8rem; } }
@@ -956,8 +958,8 @@ ol {
     color: #fff; } }
 
 .pulse {
-  -webkit-animation: pulse 1s linear;
-          animation: pulse 1s linear; }
+  -webkit-animation: pulse .5s linear;
+          animation: pulse .5s linear; }
 
 .bounce-in {
   -webkit-animation: bounceIn 1s linear;
