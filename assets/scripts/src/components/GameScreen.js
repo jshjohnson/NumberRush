@@ -9,6 +9,7 @@ import { addAnimation } from '../libs/utils';
 import classNames from 'classnames';
 
 class NumberArea extends Component {
+
     componentDidMount() {
         // Focus input on mount
         ReactDOM.findDOMNode(this.refs.input).focus();
@@ -16,14 +17,14 @@ class NumberArea extends Component {
 
     componentWillReceiveProps(nextProps) {
         // If new number is given, clear input
-        if(this.props.number != nextProps.number) {
+        if(this.props.numberProps.currentNumber != nextProps.numberProps.currentNumber) {
             ReactDOM.findDOMNode(this.refs.input).value = '';
 
             let number = ReactDOM.findDOMNode(this.refs.number);
             addAnimation(number, 'fade-in');
         }
     };
-
+    
     createClue = (string, percent = 0.4) => {
         let strArr = string.split('');
         let charCount = Math.floor(strArr.length * percent);
@@ -36,13 +37,18 @@ class NumberArea extends Component {
     };
 
     handleKeyUp = (event) => {
+        let answer = this.props.numberProps.answer;
         if(event.which == 13) {
-            this.props.answer(event.currentTarget.value, this.props.number);
+            answer(event.currentTarget.value, this.props.numberProps.currentNumber);
         }
     };
 
-    render() { 
-        let { number, answerAttempts, controls, modes, changeMode, currentMode } = this.props;
+    render() {
+        let { controls } = this.props;
+        let { modes, changeMode, currentMode } = this.props.modeProps;
+        let { currentNumber, answer, answerAttempts } = this.props.numberProps;
+        let { score, personalBest, remainingTime } = this.props.scoreboardProps;
+    
         return (
             <screen className="fade-in">
                 <header className="header">
@@ -53,14 +59,17 @@ class NumberArea extends Component {
                     <div className="window__container">
                         <div className="window__outer">
                             <div className="window__inner">
-                                <ScoreBoard score={ this.props.score } personalBest={ this.props.personalBest } timer={ this.props.remainingTime } />
+                                <ScoreBoard score={ score } personalBest={ personalBest } timer={ remainingTime } />
                                 <div className="bubble bubble--lg bubble--focus">
                                     <div ref="number" className="bubble__inner bubble__inner--pad">
-                                        { answerAttempts >= 3 &&
+                                        { answerAttempts >= 3 && currentMode !== 'Cheat' &&
                                             <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
                                         }
-                                        <h2 className="bubble__title zero-bottom">{ number.digits }</h2>
-                                        <p className="bubble__desc bubble__desc--offset-bottom bubble__desc--constrained">{ number.questionLanguage }</p>
+                                        { currentMode === 'Cheat' &&
+                                            <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Answer:</strong> { currentNumber.answerLanguage }</p>
+                                        }
+                                        <h2 className="bubble__title zero-bottom">{ currentNumber.digits }</h2>
+                                        <p className="bubble__desc bubble__desc--offset-bottom bubble__desc--constrained">{ currentNumber.questionLanguage }</p>
                                     </div>
                                 </div>
                                 <input ref="input" type="text" className="window__form-control window__form-control--push window__form-control--wide zero-bottom" onKeyUp={ this.handleKeyUp } placeholder="Translate the number above in German" autofocus></input>

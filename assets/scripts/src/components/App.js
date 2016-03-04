@@ -12,30 +12,32 @@ import ScoreBoard from './ScoreBoard';
 
 // Configs
 import { EN, DE } from '../config/languages';
-import { modes } from '../config/modes';
+import { modes, defaultMode } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
 
 const REMAINING_TIME = 60000;
-const DEFAULT_STATE = {
-    currentMode: modes[0],
-    answerAttempts: 0,
-    score: 0,
-    previousScore: 0,
-    personalBest: 0,
-    currentNumber: [],
-    mute: false,
-    remainingTime: REMAINING_TIME,
-    gameStarted: false,
-    controls: []
-}
 
 class Numberwang extends Component {
 
     constructor(props) {
         super(props);
 
+        const DEFAULT_STATE = {
+            currentMode: defaultMode,
+            answerAttempts: 0,
+            score: 0,
+            previousScore: 0,
+            personalBest: 0,
+            currentNumber: [],
+            mute: false,
+            remainingTime: REMAINING_TIME,
+            gameStarted: false,
+            controls: []
+        }
+
         let SAVED_STATE = null;
 
+        // If there is already a saved state in local stroage, use that
         if(localStorage.getItem('NumberwangState') !== null) {
             SAVED_STATE = JSON.parse(localStorage.NumberwangState);
         }
@@ -232,9 +234,8 @@ class Numberwang extends Component {
             while(numberCount < numberLimit) {
                 let number = getRandomNumber(1, numberRange);
 
-                // If number doesn't already exist in numbers array
-                // otherwise get a new one
-                if(numbers.indexOf(number) === -1) {
+                // If number is not the same as the current number
+                if(number !== this.state.currentNumber.digits) {
                     numbers.push({
                         digits: number,
                         questionLanguage: capitalise(this.translateNumber(number, EN, 'forwards', true)),
@@ -315,13 +316,31 @@ class Numberwang extends Component {
     };
 
     render() {
+        let modeProps = {
+            modes: modes,
+            changeMode: this.handleGameModeChange,
+            currentMode: this.state.currentMode.name
+        };
+
+        let numberProps = {
+            currentNumber: this.state.currentNumber,
+            answer: this.answer,
+            answerAttempts: this.state.answerAttempts
+        };
+
+        let scoreboardProps = {
+            score: this.state.score,
+            personalBest: this.state.personalBest,
+            remainingTime: this.state.remainingTime
+        };
+
         return (
             <numberwang className="window">
                 {(!this.state.gameStarted) && (
                     <StartScreen previousScore={ this.state.previousScore } personalBest={ this.state.personalBest } startGame={ this.startGame } />
                 )}
                 {(this.state.gameStarted) && (
-                    <GameScreen modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name } controls={ this.state.controls } score={ this.state.score } personalBest={ this.state.personalBest } remainingTime={ this.state.remainingTime } answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
+                    <GameScreen modeProps={ modeProps } numberProps={ numberProps } scoreboardProps={ scoreboardProps } controls={ this.state.controls } />
                 )}
             </numberwang>
         );

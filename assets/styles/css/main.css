@@ -811,7 +811,8 @@ ol {
       right: 22%; } }
   @media (max-width: 479px) {
     .bubble--timer {
-      right: 18%; } }
+      margin-top: -1.2rem;
+      right: 15%; } }
 
 .bubble--score {
   background-color: #00af16;
@@ -847,7 +848,18 @@ ol {
   background-color: #e91e63;
   color: #fff;
   border: none;
-  border-radius: 10rem; }
+  border-radius: 10rem;
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  transition: -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out; }
+  .bubble--input:hover {
+    -webkit-transform: scale(1.05, 1.05);
+            transform: scale(1.05, 1.05);
+    -webkit-transition: -webkit-transform .2s ease-in-out;
+    transition: -webkit-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out; }
   .bubble--input:before {
     width: 100%;
     height: 100%;

@@ -72,7 +72,10 @@ $bubble-input-border-radius: 10rem;
     position: absolute;
     right: 18%;
     @include respond-max($global-screen-sm) { right: 22%; }
-    @include respond-max($global-screen-xs) { right: 18%; }
+    @include respond-max($global-screen-xs) { 
+        margin-top: -1.2rem;
+        right: 15%; 
+    }
 }
 
 .bubble--score {
@@ -105,6 +108,11 @@ $bubble-input-border-radius: 10rem;
     color: $brand-white;
     border: none;
     border-radius: $bubble-input-border-radius;
+    transition: transform .2s ease-in-out;
+    &:hover {
+        transform: scale(1.05,1.05);
+        transition: transform .2s ease-in-out;
+    }
     &:before {
         width: 100%;
         height: 100%;

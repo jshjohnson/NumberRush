@@ -1,5 +1,10 @@
 export const modes = [
     {
+        name: 'Cheat',
+        numberRange: 20,
+        multiplier: 1
+    },
+    {
         name: 'Easy',
         numberRange: 50,
         multiplier: 2
@@ -20,5 +25,7 @@ export const modes = [
         multiplier: 12
     }
 ];
+
+export const defaultMode = modes[1];
 
 export default modes;
