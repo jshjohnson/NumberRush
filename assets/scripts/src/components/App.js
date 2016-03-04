@@ -7,10 +7,8 @@ import merge from 'lodash/merge';
 
 // Components
 import StartScreen from './StartScreen';
-import NumberArea from './NumberArea';
+import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
-import ModeSwitcher from './ModeSwitcher';
-import GameControls from './GameControls';
 
 // Configs
 import { EN, DE } from '../config/languages';
@@ -323,13 +321,7 @@ class Numberwang extends Component {
                     <StartScreen previousScore={ this.state.previousScore } personalBest={ this.state.personalBest } startGame={ this.startGame } />
                 )}
                 {(this.state.gameStarted) && (
-                    <div>
-                        <header className="header fade-in">
-                            <GameControls controls={ this.state.controls } />
-                            <ModeSwitcher modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name }/>
-                        </header>
-                        <NumberArea score={ this.state.score } personalBest={ this.state.personalBest } remainingTime={ this.state.remainingTime } answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
-                    </div>
+                    <GameScreen modes={ modes } changeMode={ this.handleGameModeChange } currentMode={ this.state.currentMode.name } controls={ this.state.controls } score={ this.state.score } personalBest={ this.state.personalBest } remainingTime={ this.state.remainingTime } answerAttempts={ this.state.answerAttempts } answer={ this.answer } number={ this.state.currentNumber }/>
                 )}
             </numberwang>
         );
