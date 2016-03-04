@@ -15,12 +15,13 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
+const REMAINING_TIME = 60000;
+
 class Numberwang extends Component {
 
     constructor(props) {
         super(props);
 
-        const REMAINING_TIME = 60000;
         const DEFAULT_STATE = {
             currentMode: defaultMode,
             answerAttempts: 0,
