@@ -5,23 +5,22 @@ import React, { Component } from 'react';
 import { capitalise, stripHTML } from '../libs/utils';
 import merge from 'lodash/merge';
 
-// Components
-import StartScreen from './StartScreen';
-import GameScreen from './GameScreen';
-import ScoreBoard from './ScoreBoard';
-
 // Configs
 import { EN, DE } from '../config/languages';
 import { modes, defaultMode } from '../config/modes';
 import { diacriticMap } from '../config/diacritics';
 
-const REMAINING_TIME = 60000;
+// Components
+import StartScreen from './StartScreen';
+import GameScreen from './GameScreen';
+import ScoreBoard from './ScoreBoard';
 
 class Numberwang extends Component {
 
     constructor(props) {
         super(props);
 
+        const REMAINING_TIME = 60000;
         const DEFAULT_STATE = {
             currentMode: defaultMode,
             answerAttempts: 0,
