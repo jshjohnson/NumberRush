@@ -5,6 +5,7 @@ import ScoreBoard from './ScoreBoard';
 import ModeSwitcher from './ModeSwitcher';
 import GameControls from './GameControls';
 
+import { addAnimation } from '../libs/utils';
 import classNames from 'classnames';
 
 class NumberArea extends Component {
@@ -17,6 +18,9 @@ class NumberArea extends Component {
         // If new number is given, clear input
         if(this.props.number != nextProps.number) {
             ReactDOM.findDOMNode(this.refs.input).value = '';
+
+            let number = ReactDOM.findDOMNode(this.refs.number);
+            addAnimation(number, 'fade-in');
         }
     };
 
@@ -51,7 +55,7 @@ class NumberArea extends Component {
                             <div className="window__inner">
                                 <ScoreBoard score={ this.props.score } personalBest={ this.props.personalBest } timer={ this.props.remainingTime } />
                                 <div className="bubble bubble--lg bubble--focus">
-                                    <div className="bubble__inner bubble__inner--pad">
+                                    <div ref="number" className="bubble__inner bubble__inner--pad">
                                         { answerAttempts >= 3 &&
                                             <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
                                         }

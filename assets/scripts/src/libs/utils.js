@@ -283,3 +283,15 @@ export let stripHTML = function(html) {
    el.innerHTML = html;
    return el.textContent || el.innerText || "";
 };
+
+export let addAnimation = (el, animation) => {
+    let animationEvent = whichAnimationEvent();
+
+    let removeAnimation = () => {
+        el.classList.remove(animation);
+        el.removeEventListener(animationEvent, removeAnimation, false);
+    };
+
+    el.classList.add(animation);
+    el.addEventListener(animationEvent, removeAnimation, false);
+};

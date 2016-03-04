@@ -272,7 +272,7 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let audio = new Audio('../assets/audio/success.mp3');
+            let audio = new Audio('assets/audio/success.mp3');
             audio.play();
         }
 
@@ -293,7 +293,7 @@ class Numberwang extends Component {
         });
 
         if(!this.state.mute) {
-            let audio = new Audio('../assets/audio/incorrect-1.mp3');
+            let audio = new Audio('assets/audio/incorrect-1.mp3');
             audio.play();
         }
     };

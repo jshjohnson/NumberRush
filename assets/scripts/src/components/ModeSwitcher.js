@@ -8,9 +8,7 @@ class ModeSwitcher extends Component {
                 <select className="window__input window__input--select window__input--push-left window__input--absolute" onChange={ changeMode } value={ currentMode }>
                    {
                         modes.map(function(mode) {
-                            return (
-                                <option key={ mode.name } value={ mode.name }>{ mode.name }</option>
-                            )
+                            return <option key={ mode.name } value={ mode.name }>{ mode.name }</option>
                         })
                    }
                 </select>
