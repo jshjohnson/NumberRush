@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Utilities
-import { capitalise, stripHTML } from '../libs/utils';
+import { capitalise, stripHTML, getRandomNumber } from '../libs/utils';
 import merge from 'lodash/merge';
 
 // Configs
@@ -252,10 +252,6 @@ class Numberwang extends Component {
         let numbers = []
         let numberCount = 0;
         let numberRange = this.state.currentMode.numberRange;
-
-        let getRandomNumber = function(min, max) {
-            return Math.floor(Math.random() * (max - min) + min);
-        };
 
         let getNumber = function(){
             let number = getRandomNumber(1, numberRange);
