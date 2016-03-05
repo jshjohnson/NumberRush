@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'false',
+  devtool: 'cheap-module-source-map',
   entry: [
     './assets/scripts/src/index'
   ],
@@ -14,7 +14,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
-      mangle: false,
+      mangle: true,
       output: {
         comments: false
       },

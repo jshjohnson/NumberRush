@@ -15,7 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
-const REMAINING_TIME = 11000;
+const REMAINING_TIME = 60000;
 
 class Numberwang extends Component {
 
