@@ -15,7 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
-const REMAINING_TIME = 600000;
+const REMAINING_TIME = 60000;
 
 class Numberwang extends Component {
 
@@ -241,6 +241,7 @@ class Numberwang extends Component {
 
         let convert = function(num) {
             if (num == 0) return "zero";
+            else if (num == 1) return lang.one[0];
             else return convertMillions(num);
         }
 
