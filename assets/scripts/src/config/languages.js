@@ -10,7 +10,7 @@ export const EN = {
 
 export const DE = {
     'ones': ['', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun'],
-    'tens': ['', '', 'zwanßig', 'dreißig', 'vierßig', 'fünfßig', 'sechßig', 'siebßig', 'achtßig', 'neunßig'],
+    'tens': ['', '', 'zwanzig', 'dreißig', 'vierßig', 'fünfzig', 'sechzig', 'siebßig', 'achtzig', 'neunzig'],
     'teens': ['zehn', 'elf', 'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'],
     'million': 'milliard',
     'thousand': 'tausend',

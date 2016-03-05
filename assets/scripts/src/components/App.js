@@ -15,7 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
-const REMAINING_TIME = 60000;
+const REMAINING_TIME = 600000;
 
 class Numberwang extends Component {
 
@@ -107,7 +107,7 @@ class Numberwang extends Component {
             controls = merge(controls, savedState.controls);
         }
 
-        let numbers = this.getNewNumbers(1);
+        let numbers = this.getNewNumber();
 
         let newState = {
             answerAttempts: 0,
@@ -135,7 +135,7 @@ class Numberwang extends Component {
     };
 
     restartGame = () => {
-        let numbers = this.getNewNumbers(1);
+        let numbers = this.getNewNumber();
 
         let newState = {
             answerAttempts: 0,
@@ -174,7 +174,7 @@ class Numberwang extends Component {
         }
 
         this.setState(newState, function(){
-            let numbers = this.getNewNumbers(1);
+            let numbers = this.getNewNumber();
             return this.setState({
                 currentNumber: numbers[0],
                 answerAttempts: 0
@@ -247,9 +247,8 @@ class Numberwang extends Component {
         return convert(num);
     };
 
-    getNewNumbers = (limit) => {
+    getNewNumber = () => {
         let numbers = []
-        let numberLimit = limit || 1;
         let numberCount = 0;
         let numberRange = this.state.currentMode.numberRange;
 
@@ -257,26 +256,25 @@ class Numberwang extends Component {
             return Math.floor(Math.random() * (max - min) + min);
         };
 
-        let fillNumbersArray = function(){
-            while(numberCount < numberLimit) {
-                let number = getRandomNumber(1, numberRange);
+        let getNumber = function(){
+            let number = getRandomNumber(1, numberRange);
 
-                // If number is not the same as the current number
-                if(number !== this.state.currentNumber.digits) {
-                    numbers.push({
-                        digits: number,
-                        questionLanguage: capitalise(this.translateNumber(number, EN, 'forwards', true)),
-                        answerLanguage: capitalise(this.translateNumber(number, DE, 'backwards', false)),
-                    });
+            // If number is not the same as the current number
+            if(number !== this.state.currentNumber.digits) {
+                numbers.push({
+                    digits: number,
+                    questionLanguage: capitalise(this.translateNumber(number, EN, 'forwards', true)),
+                    answerLanguage: capitalise(this.translateNumber(number, DE, 'backwards', false)),
+                });
 
-                    numberCount++;
-                } else {
-                    fillNumbersArray();
-                }
-            }  
+                numberCount++;
+            } else {
+                getNumber();
+            } 
+
         }.bind(this);
 
-        fillNumbersArray();
+        getNumber();
 
         return numbers;
     };
@@ -291,7 +289,7 @@ class Numberwang extends Component {
 
     handleSuccess = (answer) => {
         // Get new numbers
-        let numbers = this.getNewNumbers(1);
+        let numbers = this.getNewNumber();
         // Increment score 
         let score = this.state.score + this.state.currentMode.multiplier;
         // Increment timer
