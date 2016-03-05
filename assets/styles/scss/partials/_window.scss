@@ -12,14 +12,9 @@ $window-focus-font-size: 20rem;
     margin: auto;
 }
 
-.window__area, .window__outer, .window__inner {
+.window__outer, .window__inner {
     width: 100%;
     height: 100%;
-}
-
-.window__area { 
-    position: relative;
-    display: inline-block;
 }
 
 .window__outer {
