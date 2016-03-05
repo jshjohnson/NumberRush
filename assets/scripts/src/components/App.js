@@ -38,8 +38,8 @@ class Numberwang extends Component {
         let SAVED_STATE = null;
 
         // If there is already a saved state in local stroage, use that
-        if(localStorage.getItem('NumberwangState') !== null) {
-            SAVED_STATE = JSON.parse(localStorage.NumberwangState);
+        if(localStorage.getItem('NumberRushState') !== null) {
+            SAVED_STATE = JSON.parse(localStorage.NumberRushState);
         }
 
         this.state = SAVED_STATE || DEFAULT_STATE;
@@ -50,7 +50,7 @@ class Numberwang extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        localStorage.NumberwangState = JSON.stringify(this.state);
+        localStorage.NumberRushState = JSON.stringify(this.state);
     };
 
     playSound = (sound, loop = false) => {
@@ -102,8 +102,8 @@ class Numberwang extends Component {
         ];
 
         // Don't override controls if user has a saved state already
-        if(localStorage.getItem('NumberwangState') !== null) {
-            let savedState = JSON.parse(localStorage.NumberwangState);
+        if(localStorage.getItem('NumberRushState') !== null) {
+            let savedState = JSON.parse(localStorage.NumberRushState);
             controls = merge(controls, savedState.controls);
         }
 
@@ -145,7 +145,7 @@ class Numberwang extends Component {
             remainingTime: REMAINING_TIME
         };
 
-        localStorage.removeItem('NumberwangState');
+        localStorage.removeItem('NumberRushState');
         clearInterval(this.remainingTimer);
         this.setState(newState, () => {
             this.startTimer();
