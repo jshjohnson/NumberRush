@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { whichAnimationEvent } from '../libs/utils';
 import ReactDOM from 'react-dom';
 
-import { addAnimation } from '../libs/utils';
+import { whichAnimationEvent, addAnimation } from '../libs/utils';
 import classNames from 'classnames';
 
 class ScoreBoard extends Component {

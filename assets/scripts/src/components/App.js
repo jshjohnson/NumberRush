@@ -15,7 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
-const REMAINING_TIME = 60000;
+const REMAINING_TIME = 11000;
 
 class Numberwang extends Component {
 
@@ -53,10 +53,37 @@ class Numberwang extends Component {
         localStorage.NumberwangState = JSON.stringify(this.state);
     };
 
+    playSound = (sound, loop = false) => {
+        if(!sound) return; 
+
+        let play = () => {
+            sound.currentTime = 0;
+            sound.play();
+        }
+
+        play();
+
+        if(loop) {
+            sound.addEventListener('ended', play, false);    
+        }
+    };
+
+    stopSound = (sound) => {
+        if(!sound) return; 
+        sound.pause();
+        sound.currentTime = 0;
+    };
+
     startTimer = () => {
+        let beep = new Audio('assets/audio/beep.mp3');
+
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
+            if(remainingTime === 10000 && !this.state.mute) {
+                this.playSound(beep, true);
+            }
             if(remainingTime < 0) {
+                this.stopSound(beep);
                 this.endGame();
             } else {
                 this.setState({
@@ -273,8 +300,8 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let audio = new Audio('assets/audio/success.mp3');
-            audio.play();
+            let success = new Audio('assets/audio/success.mp3');
+            success.play();
         }
 
         let newState = {
@@ -294,8 +321,8 @@ class Numberwang extends Component {
         });
 
         if(!this.state.mute) {
-            let audio = new Audio('assets/audio/incorrect-1.mp3');
-            audio.play();
+            let fail = new Audio('assets/audio/incorrect.mp3');
+            fail.play();
         }
     };
 
