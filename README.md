@@ -9,7 +9,7 @@ My first experimentation with React.js: A simple "against the clock" style numbe
 * Scripts: `npm run js:build`
 
 ##Code review
-I'm new to React so any performance improvements that can be made will be appreciated as pull requests. All React-specific stuff is located in [`assets/scripts/src/`](https://github.com/jshjohnson/NumberRush/tree/develop/assets/scripts/src)
+I'm new to React so any performance improvements that can be made will be appreciated as pull requests. All React-specific stuff is located in [`assets/scripts/src/`](https://github.com/jshjohnson/NumberRush/tree/master/assets/scripts/src)
 
 ###To do:
 * Add unit tests
