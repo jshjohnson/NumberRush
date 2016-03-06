@@ -266,7 +266,7 @@ class Numberwang extends Component {
 
         let getNumber = function(){
             let number = getRandomNumber(1, numberRange);
-
+            
             // If number is not the same as the current number
             if(number !== this.state.currentNumber.digits) {
                 numbers.push({
