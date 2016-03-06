@@ -16,7 +16,7 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 const REMAINING_TIME = 60000;
-const CACHE_NUMBER = 4;
+const CACHE_NUMBER = 5;
 
 class Numberwang extends Component {
 
@@ -64,6 +64,12 @@ class Numberwang extends Component {
         localStorage.NumberRushState = JSON.stringify(this.state);
     };
 
+    /**
+     * Play given sound with optional loop
+     * @param  {NodeElement}  sound Reference to audio element
+     * @param  {Boolean} loop  Whether the sound should loop upon completion
+     * @return
+     */
     playSound = (sound, loop = false) => {
         if(!sound) return; 
 
@@ -79,12 +85,21 @@ class Numberwang extends Component {
         }
     };
 
+    /**
+     * Stop given sound being played
+     * @param  {NodeElement}  sound Reference to audio element
+     * @return
+     */
     stopSound = (sound) => {
         if(!sound) return; 
         sound.pause();
         sound.currentTime = 0;
     };
 
+    /**
+     * Begin timer and handle behaviour based on time remaining
+     * @return
+     */
     startTimer = () => {
         let beep = new Audio('assets/audio/beep.mp3');
 
@@ -104,6 +119,10 @@ class Numberwang extends Component {
         }, 1000);
     };
 
+    /**
+     * Start game with a fresh state and a new number to answer
+     * @return
+     */
     startGame = () => {
         let controls = [
             { name: 'End', action: this.endGame, active: true },
@@ -128,11 +147,15 @@ class Numberwang extends Component {
             gameStarted: true
         }
 
-        return this.setState(newState, () => {
+        this.setState(newState, () => {
            this.startTimer(); 
         });
     };
 
+    /**
+     * End game with fresh state (remembering previous score)
+     * @return
+     */
     endGame = () => {
         let newState = {
             gameStarted: false,
@@ -145,6 +168,10 @@ class Numberwang extends Component {
         this.setState(newState);
     };
 
+    /**
+     * Restart game with a score of 0 and a new number to answer
+     * @return
+     */
     restartGame = () => {
         let numbers = this.getNewNumber();
 
@@ -163,6 +190,10 @@ class Numberwang extends Component {
         });
     };
 
+    /** 
+     * Toggle whether the game should play audio
+     * @return
+     */
     toggleGameAudio = () => {
         let controls = [
             { name: 'End', action: this.endGame, active: true },
@@ -179,6 +210,11 @@ class Numberwang extends Component {
         this.setState(newState);
     };
 
+    /**
+     * Set the difficulty of the numbers being asked
+     * @param  {Object} newMode The mode to be switched to
+     * @return
+     */
     setGameMode = (newMode) => {
         let newState = {
             currentMode: newMode[0],
@@ -192,7 +228,12 @@ class Numberwang extends Component {
             })
         });
     };
-
+    
+    /**
+     * When a user selects a new mode, handle what should happen
+     * @param  {Object} event Reference to event
+     * @return
+     */
     handleGameModeChange = (event) => {
         let selectedMode = modes.filter(function(mode) {
             return mode.name == event.currentTarget.value;
@@ -201,6 +242,14 @@ class Numberwang extends Component {
         this.setGameMode(selectedMode);
     };
 
+    /**
+     * Translate a number into textual form 
+     * @param  {Number}  num       Number to translate
+     * @param  {[type]}  lang      Language to reference
+     * @param  {String}  direction Whether a number should be translated to 'Sixty nine' or 'Nine Sixty'
+     * @param  {Boolean} space     Whether spaces should be placed between numbers, i.e. 'Sixty nine' or 'Sixtynine'
+     * @return {String}            Translated number
+     */
     translateNumber = (num, lang, direction = 'forwards', space = true) => {
         let whitespace = space ? ' ' : '';
 
@@ -259,6 +308,10 @@ class Numberwang extends Component {
         return convert(num);
     };
 
+    /**
+     * Get new random number with translated values
+     * @return {Array} A random number object within an array (eh?)
+     */
     getNewNumber = () => {
         let numbers = []
         let numberCount = 0;
@@ -287,6 +340,11 @@ class Numberwang extends Component {
         return numbers;
     };
 
+    /**
+     * Replace special characters within a string to standard characters
+     * @param  {String} string String to run function against
+     * @return {String}        String with standard characters 
+     */
     removeDiacritics = (string) => {
         diacriticMap.forEach(function(element, index) {
             string = string.replace(diacriticMap[index].letters, diacriticMap[index].base);
@@ -295,6 +353,11 @@ class Numberwang extends Component {
         return string;
     };
 
+    /**
+     * Handle what happens if a user answers the question correctly
+     * @param  {String} answer User inputted answer
+     * @return
+     */
     handleSuccess = (answer) => {
         // Get new numbers
         let numbers = this.getNewNumber();
@@ -318,9 +381,13 @@ class Numberwang extends Component {
             remainingTime
         }
 
-        return this.setState(newState);
+        this.setState(newState);
     };
 
+    /**
+     * Handle what happens if a user answers the question incorrectly
+     * @return
+     */
     handleFailure = () => {
         this.setState({
             answerAttempts: this.state.answerAttempts + 1
@@ -332,14 +399,26 @@ class Numberwang extends Component {
         }
     };
 
+    /**
+     * Determines whether a given response to a question is correct or incorrect
+     * @param  {String} response The users response
+     * @param  {Object} answer   The correct answer to compare the users response to
+     * @return {Boolean}         Whether the answer is correct or incorrect
+     */
     isCorrect = (response, answer) => {
         let responseSanitised = response.toLowerCase();
         let answerSanitised = answer.answerLanguage.toLowerCase();
         return (responseSanitised === answerSanitised || responseSanitised === this.removeDiacritics(answerSanitised)) ? true : false;
     };
 
+    /**
+     * Handle what happens when a user submits a response to a question
+     * @param  {String} response The users response
+     * @param  {Object} answer   The correct answer
+     * @return
+     */
     answer = (response, answer) => {
-        let responseSanitised = stripHTML(response);
+        let responseSanitised = stripHTML(response).replace(/\s+/g, '');
 
         if (this.isCorrect(responseSanitised, answer)) {
             this.handleSuccess(answer);
