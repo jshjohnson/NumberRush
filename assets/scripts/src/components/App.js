@@ -15,7 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
-const REMAINING_TIME = 60000;
+const REMAINING_TIME = 11000;
 const CACHE_NUMBER = 7;
 const BEEP = new Audio('assets/audio/beep.mp3');
 const SUCCESS = new Audio('assets/audio/success.mp3');
@@ -77,15 +77,12 @@ class Numberwang extends Component {
         if(!sound) return; 
 
         let play = () => {
+            if(loop) sound.loop = true;
             sound.currentTime = 0;
             sound.play();
         }
 
         play();
-
-        if(loop) {
-            sound.addEventListener('ended', play, false);    
-        }
     };
 
     /**
