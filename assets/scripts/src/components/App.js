@@ -332,10 +332,8 @@ class Numberwang extends Component {
 
         if (this.isCorrect(responseSanitised, answer)) {
             this.handleSuccess(answer);
-            console.log('Yay');
         } else if(response) {
             this.handleFailure();
-            console.log('Nay');
         }
     };
 
