@@ -15,3 +15,6 @@ I'm new to React so any performance improvements that can be made will be apprec
 * Add unit tests
 * Refactor css
 * Experiment with Redux/Flux for state handling 
+
+###Credits:
+I felt inspired to build this as a result of [this](http://jnjosh.com/posts/learning-german-with-AVSpeechUtterance/) article. Note to self: Blog more! 
