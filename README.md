@@ -13,4 +13,5 @@ I'm new to React so any performance improvements that can be made will be apprec
 
 ###To do:
 * Add unit tests
+* Refactor css
 * Experiment with Redux/Flux for state handling 

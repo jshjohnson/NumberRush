@@ -15,4 +15,48 @@ $header-height: 50px;
     right: 0;
     z-index: 1;
     will-change: transform;
+    @include respond-max($global-screen-sm) { position: relative; }
+}
+
+.header__controls {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.header__input {
+    text-overflow: '';
+    text-indent: 0.01px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+}
+
+.header__input--select {
+    background-position: right center;
+    background-size: 1rem;
+    background-image: url(../../images/arrow.svg);
+    background-repeat: no-repeat;
+    padding: 0 $global-guttering 0 $global-guttering/2;
+    &:focus { outline: none; }
+}
+
+.header__input--absolute {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+.header__input--left { right: 0; }
+.header__input--right { right: 0; }
+
+.header__input--push-left { left: 1rem; }
+.header__input--push-right { right: 1rem; }
+
+.header__input--btn {
+    color: white;
+    padding: 0 $global-guttering;
+    border-left: 1px solid darken($brand-primary, 10%);
+    &:focus { outline: 0; }
 }
