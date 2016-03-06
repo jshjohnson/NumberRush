@@ -16,8 +16,8 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 // Constants
-const REMAINING_TIME = 11000;
-const CACHE_NUMBER = 7;
+const REMAINING_TIME = 60000;
+const CACHE_NUMBER = 8;
 const BEEP = new Audio('assets/audio/beep.mp3');
 const SUCCESS = new Audio('assets/audio/success.mp3');
 const FAIL = new Audio('assets/audio/incorrect.mp3');
