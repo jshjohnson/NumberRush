@@ -16,7 +16,7 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 // Constants
-const REMAINING_TIME = 60000;
+const REMAINING_TIME = 11000;
 const CACHE_NUMBER = 7;
 const BEEP = new Audio('assets/audio/beep.mp3');
 const SUCCESS = new Audio('assets/audio/success.mp3');
@@ -126,11 +126,11 @@ class Numberwang extends Component {
     startTimer() {
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
-            if(remainingTime === 10000 && !this.state.mute) {
-                this.playSound(BEEP, true);
+            if(remainingTime < 10000 && !this.state.mute) {
+                this.playSound(BEEP);
             }
             if(remainingTime < 0) {
-                this.stopSound(BEEP);
+                if(!this.state.mute) this.stopSound(BEEP);
                 this.endGame();
             } else {
                 this.setState({
@@ -226,7 +226,7 @@ class Numberwang extends Component {
         let newState = {
             mute: this.state.mute ? false : true,
             controls
-        }
+        };
 
         this.setState(newState);
     };
@@ -239,7 +239,7 @@ class Numberwang extends Component {
     setGameMode(newMode) {
         let newState = {
             currentMode: newMode[0],
-        }
+        };
 
         this.setState(newState, function(){
             let number = this.getNewNumber();
