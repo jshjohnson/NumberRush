@@ -57,6 +57,7 @@ $window-focus-font-size: 20rem;
     border-radius: 10em;
     color: $brand-primary;
     box-shadow: 0px 0px 100px 5px rgba($brand-white, .25);
+    @include respond-max($global-screen-sm) { max-width: 200px; }
     &:focus { outline: none; }
 }
 

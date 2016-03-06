@@ -15,6 +15,7 @@ $header-height: 50px;
     right: 0;
     z-index: 1;
     will-change: transform;
+    overflow: hidden;
     @include respond-max($global-screen-sm) { position: relative; }
 }
 

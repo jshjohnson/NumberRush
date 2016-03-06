@@ -109,6 +109,10 @@ $bubble-input-border-radius: 10rem;
     border: none;
     border-radius: $bubble-input-border-radius;
     transition: transform .2s ease-in-out;
+    @include respond-max($global-screen-sm) { 
+        padding: $global-guttering/2.5 $global-guttering/1.2;
+        font-size: $global-font-size-sm;
+    }
     &:hover {
         transform: scale(1.05,1.05);
         transition: transform .2s ease-in-out;

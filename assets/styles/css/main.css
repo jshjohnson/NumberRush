@@ -623,7 +623,8 @@ ol {
   left: 0;
   right: 0;
   z-index: 1;
-  will-change: transform; }
+  will-change: transform;
+  overflow: hidden; }
   @media (max-width: 769px) {
     .header {
       position: relative; } }
@@ -734,6 +735,9 @@ ol {
   border-radius: 10em;
   color: #222;
   box-shadow: 0px 0px 100px 5px rgba(255, 255, 255, 0.25); }
+  @media (max-width: 769px) {
+    .window__form-control {
+      max-width: 200px; } }
   .window__form-control:focus {
     outline: none; }
 
@@ -864,6 +868,10 @@ ol {
   transition: -webkit-transform .2s ease-in-out;
   transition: transform .2s ease-in-out;
   transition: transform .2s ease-in-out, -webkit-transform .2s ease-in-out; }
+  @media (max-width: 769px) {
+    .bubble--input {
+      padding: 0.96rem 2rem;
+      font-size: 1.4rem; } }
   .bubble--input:hover {
     -webkit-transform: scale(1.05, 1.05);
             transform: scale(1.05, 1.05);
