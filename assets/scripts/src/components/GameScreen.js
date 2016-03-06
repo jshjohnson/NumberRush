@@ -63,7 +63,7 @@ class NumberArea extends Component {
                                 <div className="bubble bubble--lg bubble--focus">
                                     <div ref="number" className="bubble__inner bubble__inner--pad">
                                         { answerAttempts >= 3 && currentMode !== 'Cheat' &&
-                                            <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Clue:</strong> { this.createClue(number.answerLanguage)  }</p>
+                                            <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Clue:</strong> { this.createClue(currentNumber.answerLanguage)  }</p>
                                         }
                                         { currentMode === 'Cheat' &&
                                             <p className="bubble__desc bubble__desc--offset-top bubble__desc--constrained"><strong>Answer:</strong> { currentNumber.answerLanguage }</p>

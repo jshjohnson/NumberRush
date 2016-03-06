@@ -324,16 +324,18 @@ class Numberwang extends Component {
     isCorrect = (response, answer) => {
         let responseSanitised = response.toLowerCase();
         let answerSanitised = answer.answerLanguage.toLowerCase();
-
         return (responseSanitised === answerSanitised || responseSanitised === this.removeDiacritics(answerSanitised)) ? true : false;
     };
 
     answer = (response, answer) => {
         let responseSanitised = stripHTML(response);
+
         if (this.isCorrect(responseSanitised, answer)) {
             this.handleSuccess(answer);
+            console.log('Yay');
         } else if(response) {
             this.handleFailure();
+            console.log('Nay');
         }
     };
 

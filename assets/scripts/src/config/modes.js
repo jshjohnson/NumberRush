@@ -1,7 +1,7 @@
 export const modes = [
     {
         name: 'Cheat',
-        numberRange: 20,
+        numberRange: 50,
         multiplier: 1
     },
     {
