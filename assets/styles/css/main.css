@@ -684,7 +684,7 @@ ol {
   margin: auto; }
   @media (max-width: 769px) {
     .window__container {
-      padding-top: 4.8rem; } }
+      padding-top: 2.4rem; } }
 
 .window__outer {
   display: table;
@@ -721,7 +721,7 @@ ol {
   font-size: 10rem; }
   @media (max-width: 769px) {
     .window__focus--sm {
-      font-size: 5rem; } }
+      font-size: 4rem; } }
 
 .window__form-control {
   -webkit-appearance: none;
@@ -738,7 +738,10 @@ ol {
     outline: none; }
 
 .window__form-control--push {
-  margin: 5rem 0; }
+  margin: 4.8rem 0; }
+  @media (max-width: 769px) {
+    .window__form-control--push {
+      margin: 2.4rem 0; } }
 
 .window__form-control--wide {
   max-width: 320px; }

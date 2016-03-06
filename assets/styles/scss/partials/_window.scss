@@ -10,7 +10,7 @@ $window-focus-font-size: 20rem;
     position: relative;
     max-width: 40em;
     margin: auto;
-    @include respond-max($global-screen-sm) { padding-top: $global-guttering*2; }
+    @include respond-max($global-screen-sm) { padding-top: $global-guttering; }
 }
 
 .window__outer {
@@ -43,7 +43,7 @@ $window-focus-font-size: 20rem;
 
 .window__focus--sm { 
     font-size: $window-focus-font-size/2; 
-    @include respond-max($global-screen-sm) { font-size: $window-focus-font-size/4; }
+    @include respond-max($global-screen-sm) { font-size: $window-focus-font-size/5; }
 }
 
 .window__form-control {
@@ -60,6 +60,9 @@ $window-focus-font-size: 20rem;
     &:focus { outline: none; }
 }
 
-.window__form-control--push { margin: 5rem 0; }
+.window__form-control--push { 
+    margin: $global-guttering*2 0; 
+    @include respond-max($global-screen-sm) { margin: $global-guttering 0; }
+}
 
 .window__form-control--wide { max-width: 320px; }
