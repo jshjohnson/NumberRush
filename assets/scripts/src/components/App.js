@@ -18,6 +18,8 @@ import ScoreBoard from './ScoreBoard';
 const REMAINING_TIME = 60000;
 const CACHE_NUMBER = 7;
 const BEEP = new Audio('assets/audio/beep.mp3');
+const SUCCESS = new Audio('assets/audio/success.mp3');
+const FAIL = new Audio('assets/audio/incorrect.mp3');
 
 class Numberwang extends Component {
 
@@ -364,8 +366,7 @@ class Numberwang extends Component {
         // If game hasn't been muted
         if(!this.state.mute) {
             // Play sound
-            let success = new Audio('assets/audio/success.mp3');
-            success.play();
+            SUCCESS.play();
         }
 
         let newState = {
@@ -389,8 +390,7 @@ class Numberwang extends Component {
         });
 
         if(!this.state.mute) {
-            let fail = new Audio('assets/audio/incorrect.mp3');
-            fail.play();
+            FAIL.play();
         }
     };
 
