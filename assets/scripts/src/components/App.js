@@ -16,7 +16,7 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 const REMAINING_TIME = 60000;
-const CACHE_NUMBER = 3;
+const CACHE_NUMBER = 4;
 
 class Numberwang extends Component {
 
@@ -266,7 +266,7 @@ class Numberwang extends Component {
 
         let getNumber = function(){
             let number = getRandomNumber(1, numberRange);
-            
+
             // If number is not the same as the current number
             if(number !== this.state.currentNumber.digits) {
                 numbers.push({
