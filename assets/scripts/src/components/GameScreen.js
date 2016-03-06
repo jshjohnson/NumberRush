@@ -53,12 +53,12 @@ class NumberArea extends Component {
         let { score, personalBest, remainingTime } = this.props.scoreboardProps;
     
         return (
-            <screen className="fade-in">
-                <header className="header">
+            <screen>
+                <header className="header fade-in">
                     <GameControls controls={ controls } />
                     <ModeSwitcher modes={ modes } changeMode={ changeMode } currentMode={ currentMode }/>
                 </header>
-                <div className="window__area">
+                <div className="window__area fade-in">
                     <div className="window__container">
                         <div className="window__outer">
                             <div className="window__inner">

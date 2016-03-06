@@ -44,18 +44,7 @@
     100% { color: $brand-white; }
 }
 
-.pulse {
-    animation: pulse .5s linear;
-}
-
-.bounce-in {
-    animation: bounceIn 1s linear;
-}
-
-.flash-text {
-    animation: flashText 1s infinite;
-}
-
-.fade-in {
-    animation: fadeIn .25s linear;
-}
+.pulse { animation: pulse .5s linear; }
+.bounce-in { animation: bounceIn 1s linear; }
+.flash-text { animation: flashText 1s infinite; }
+.fade-in { animation: fadeIn .25s linear; }

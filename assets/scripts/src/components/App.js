@@ -17,6 +17,7 @@ import ScoreBoard from './ScoreBoard';
 
 const REMAINING_TIME = 60000;
 const CACHE_NUMBER = 5;
+const BEEP = new Audio('assets/audio/beep.mp3');
 
 class Numberwang extends Component {
 
@@ -30,7 +31,7 @@ class Numberwang extends Component {
             score: 0,
             previousScore: 0,
             personalBest: 0,
-            currentNumber: [],
+            currentNumber: '',
             mute: false,
             remainingTime: REMAINING_TIME,
             gameStarted: false,
@@ -101,15 +102,13 @@ class Numberwang extends Component {
      * @return
      */
     startTimer = () => {
-        let beep = new Audio('assets/audio/beep.mp3');
-
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
             if(remainingTime === 10000 && !this.state.mute) {
-                this.playSound(beep, true);
+                this.playSound(BEEP, true);
             }
             if(remainingTime < 0) {
-                this.stopSound(beep);
+                this.stopSound(BEEP);
                 this.endGame();
             } else {
                 this.setState({
@@ -137,12 +136,12 @@ class Numberwang extends Component {
             controls = merge(controls, savedState.controls);
         }
 
-        let numbers = this.getNewNumber();
+        let number = this.getNewNumber();
 
         let newState = {
             answerAttempts: 0,
             score: 0,
-            currentNumber: numbers[0],
+            currentNumber: number,
             controls,
             gameStarted: true
         }
@@ -160,11 +159,12 @@ class Numberwang extends Component {
         let newState = {
             gameStarted: false,
             previousScore: this.state.score,
-            currentNumber: [],
+            currentNumber: '',
             remainingTime: REMAINING_TIME
         };
-
+        
         clearInterval(this.remainingTimer);
+        this.stopSound(BEEP);
         this.setState(newState);
     };
 
@@ -173,18 +173,17 @@ class Numberwang extends Component {
      * @return
      */
     restartGame = () => {
-        let numbers = this.getNewNumber();
-
+        let number = this.getNewNumber();
         let newState = {
             answerAttempts: 0,
             previousScore: this.state.score,
             score: 0,
-            currentNumber: numbers[0],
+            currentNumber: number,
             remainingTime: REMAINING_TIME
         };
 
-        localStorage.removeItem('NumberRushState');
         clearInterval(this.remainingTimer);
+        this.stopSound(BEEP);
         this.setState(newState, () => {
             this.startTimer();
         });
@@ -221,9 +220,9 @@ class Numberwang extends Component {
         }
 
         this.setState(newState, function(){
-            let numbers = this.getNewNumber();
+            let number = this.getNewNumber();
             return this.setState({
-                currentNumber: numbers[0],
+                currentNumber: number,
                 answerAttempts: 0
             })
         });
@@ -310,11 +309,10 @@ class Numberwang extends Component {
 
     /**
      * Get new random number with translated values
-     * @return {Array} A random number object within an array (eh?)
+     * @return {Object} A new random number object
      */
     getNewNumber = () => {
-        let numbers = []
-        let numberCount = 0;
+        let newNumber;
         let numberRange = this.state.currentMode.numberRange;
 
         let getNumber = function(){
@@ -322,22 +320,19 @@ class Numberwang extends Component {
 
             // If number is not the same as the current number
             if(number !== this.state.currentNumber.digits) {
-                numbers.push({
+                newNumber = {
                     digits: number,
                     questionLanguage: capitalise(this.translateNumber(number, EN, 'forwards', true)),
                     answerLanguage: capitalise(this.translateNumber(number, DE, 'backwards', false)),
-                });
-
-                numberCount++;
+                };
             } else {
                 getNumber();
             } 
-
         }.bind(this);
 
         getNumber();
 
-        return numbers;
+        return newNumber;
     };
 
     /**
@@ -359,8 +354,8 @@ class Numberwang extends Component {
      * @return
      */
     handleSuccess = (answer) => {
-        // Get new numbers
-        let numbers = this.getNewNumber();
+        // Get new number
+        let number = this.getNewNumber();
         // Increment score 
         let score = this.state.score + this.state.currentMode.multiplier;
         // Increment timer
@@ -376,7 +371,7 @@ class Numberwang extends Component {
         let newState = {
             personalBest: score > this.state.personalBest ? score : this.state.personalBest,
             answerAttempts: 0,
-            currentNumber: numbers[0],
+            currentNumber: number,
             score,
             remainingTime
         }
