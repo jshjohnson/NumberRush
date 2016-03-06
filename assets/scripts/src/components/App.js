@@ -52,8 +52,7 @@ class Numberwang extends Component {
                 SAVED_STATE = parsedState;
             } else {
                 // Otherwise clear the out of date version
-                // localStorage.removeItem('NumberRushState');
-                localStorage.clear();
+                localStorage.removeItem('NumberRushState');
             }
         }
         
