@@ -1,12 +1,15 @@
+// React
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+// Utilities
+import { addAnimation } from '../libs/utils';
+import classNames from 'classnames';
+
+// Components
 import ScoreBoard from './ScoreBoard';
 import ModeSwitcher from './ModeSwitcher';
 import GameControls from './GameControls';
-
-import { addAnimation } from '../libs/utils';
-import classNames from 'classnames';
 
 class NumberArea extends Component {
 

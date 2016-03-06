@@ -16,6 +16,7 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 const REMAINING_TIME = 60000;
+const CACHE_NUMBER = 1;
 
 class Numberwang extends Component {
 
@@ -23,6 +24,7 @@ class Numberwang extends Component {
         super(props);
 
         const DEFAULT_STATE = {
+            cache: CACHE_NUMBER,
             currentMode: defaultMode,
             answerAttempts: 0,
             score: 0,
@@ -37,9 +39,17 @@ class Numberwang extends Component {
 
         let SAVED_STATE = null;
 
-        // If there is already a saved state in local stroage, use that
+        // If there is already a saved state in local storage
         if(localStorage.getItem('NumberRushState') !== null) {
-            SAVED_STATE = JSON.parse(localStorage.NumberRushState);
+            let parsedState = JSON.parse(localStorage.NumberRushState);
+
+            // And its cache is not out of date
+            if(parsedState.cache && parsedState.cache === CACHE_NUMBER) {
+                SAVED_STATE = parsedState;
+            } else {
+                // Otherwise clear the out of date version
+                localStorage.removeItem('NumberRushState');
+            }
         }
 
         this.state = SAVED_STATE || DEFAULT_STATE;
