@@ -16,7 +16,7 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 const REMAINING_TIME = 60000;
-const CACHE_NUMBER = 2;
+const CACHE_NUMBER = 3;
 
 class Numberwang extends Component {
 
