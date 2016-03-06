@@ -1,3 +1,4 @@
+// React
 import React, { Component } from 'react';
 
 class ModeSwitcher extends Component {

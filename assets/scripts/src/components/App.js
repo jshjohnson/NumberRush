@@ -15,6 +15,7 @@ import StartScreen from './StartScreen';
 import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
+// Constants
 const REMAINING_TIME = 60000;
 const CACHE_NUMBER = 7;
 const BEEP = new Audio('assets/audio/beep.mp3');
@@ -55,8 +56,30 @@ class Numberwang extends Component {
                 localStorage.clear();
             }
         }
-
+        
         this.state = SAVED_STATE || DEFAULT_STATE;
+        
+        // Define our methods. This seems verbose :/ 
+        this.playSound              = this.playSound.bind(this);
+        this.stopSound              = this.stopSound.bind(this);
+        this.toggleGameAudio        = this.toggleGameAudio.bind(this);
+
+        this.startTimer             = this.startTimer.bind(this);
+        this.startGame              = this.startGame.bind(this);
+        this.endGame                = this.endGame.bind(this);
+        this.restartGame            = this.restartGame.bind(this);
+
+        this.setGameMode            = this.setGameMode.bind(this);
+        this.handleGameModeChange   = this.handleGameModeChange.bind(this);
+
+        this.getNewNumber           = this.getNewNumber.bind(this);
+        this.translateNumber        = this.translateNumber.bind(this);
+        this.removeDiacritics       = this.removeDiacritics.bind(this);
+
+        this.handleAnswer           = this.handleAnswer.bind(this);
+        this.handleSuccess          = this.handleSuccess.bind(this);
+        this.handleFailure          = this.handleFailure.bind(this);
+        this.isCorrect              = this.isCorrect.bind(this);
     }
 
     componentDidMount() {
@@ -73,7 +96,7 @@ class Numberwang extends Component {
      * @param  {Boolean} loop  Whether the sound should loop upon completion
      * @return
      */
-    playSound = (sound, loop = false) => {
+    playSound(sound, loop = false) {
         if(!sound) return; 
 
         let play = () => {
@@ -90,7 +113,7 @@ class Numberwang extends Component {
      * @param  {NodeElement}  sound Reference to audio element
      * @return
      */
-    stopSound = (sound) => {
+    stopSound(sound) {
         if(!sound) return; 
         sound.pause();
         sound.currentTime = 0;
@@ -100,7 +123,7 @@ class Numberwang extends Component {
      * Begin timer and handle behaviour based on time remaining
      * @return
      */
-    startTimer = () => {
+    startTimer() {
         this.remainingTimer = setInterval(() => {
             let remainingTime = this.state.remainingTime - 1000;
             if(remainingTime === 10000 && !this.state.mute) {
@@ -121,7 +144,7 @@ class Numberwang extends Component {
      * Start game with a fresh state and a new number to answer
      * @return
      */
-    startGame = () => {
+    startGame() {
         let controls = [
             { name: 'End', action: this.endGame, active: true },
             { name: 'Restart', action: this.restartGame, active: true },
@@ -154,7 +177,7 @@ class Numberwang extends Component {
      * End game with fresh state (remembering previous score)
      * @return
      */
-    endGame = () => {
+    endGame() {
         let newState = {
             gameStarted: false,
             previousScore: this.state.score,
@@ -171,7 +194,7 @@ class Numberwang extends Component {
      * Restart game with a score of 0 and a new number to answer
      * @return
      */
-    restartGame = () => {
+    restartGame() {
         let number = this.getNewNumber();
         let newState = {
             answerAttempts: 0,
@@ -192,7 +215,7 @@ class Numberwang extends Component {
      * Toggle whether the game should play audio
      * @return
      */
-    toggleGameAudio = () => {
+    toggleGameAudio() {
         let controls = [
             { name: 'End', action: this.endGame, active: true },
             { name: 'Restart', action: this.restartGame, active: true },
@@ -213,7 +236,7 @@ class Numberwang extends Component {
      * @param  {Object} newMode The mode to be switched to
      * @return
      */
-    setGameMode = (newMode) => {
+    setGameMode(newMode) {
         let newState = {
             currentMode: newMode[0],
         }
@@ -232,7 +255,7 @@ class Numberwang extends Component {
      * @param  {Object} event Reference to event
      * @return
      */
-    handleGameModeChange = (event) => {
+    handleGameModeChange(event) {
         let selectedMode = modes.filter(function(mode) {
             return mode.name == event.currentTarget.value;
         });
@@ -248,7 +271,7 @@ class Numberwang extends Component {
      * @param  {Boolean} space     Whether spaces should be placed between numbers, i.e. 'Sixty nine' or 'Sixtynine'
      * @return {String}            Translated number
      */
-    translateNumber = (num, lang, direction = 'forwards', space = true) => {
+    translateNumber(num, lang, direction = 'forwards', space = true) {
         let whitespace = space ? ' ' : '';
 
         let convertMillions = function(num) {
@@ -310,7 +333,7 @@ class Numberwang extends Component {
      * Get new random number with translated values
      * @return {Object} A new random number object
      */
-    getNewNumber = () => {
+    getNewNumber() {
         let newNumber;
         let numberRange = this.state.currentMode.numberRange;
 
@@ -339,7 +362,7 @@ class Numberwang extends Component {
      * @param  {String} string String to run function against
      * @return {String}        String with standard characters 
      */
-    removeDiacritics = (string) => {
+    removeDiacritics(string) {
         diacriticMap.forEach(function(element, index) {
             string = string.replace(diacriticMap[index].letters, diacriticMap[index].base);
         });
@@ -352,7 +375,7 @@ class Numberwang extends Component {
      * @param  {String} answer User inputted answer
      * @return
      */
-    handleSuccess = (answer) => {
+    handleSuccess(answer) {
         // Get new number
         let number = this.getNewNumber();
         // Increment score 
@@ -381,7 +404,7 @@ class Numberwang extends Component {
      * Handle what happens if a user answers the question incorrectly
      * @return
      */
-    handleFailure = () => {
+    handleFailure() {
         this.setState({
             answerAttempts: this.state.answerAttempts + 1
         });
@@ -397,7 +420,7 @@ class Numberwang extends Component {
      * @param  {Object} answer   The correct answer to compare the users response to
      * @return {Boolean}         Whether the answer is correct or incorrect
      */
-    isCorrect = (response, answer) => {
+    isCorrect(response, answer) {
         let responseSanitised = response.toLowerCase();
         let answerSanitised = answer.answerLanguage.toLowerCase();
         return (responseSanitised === answerSanitised || responseSanitised === this.removeDiacritics(answerSanitised)) ? true : false;
@@ -409,7 +432,7 @@ class Numberwang extends Component {
      * @param  {Object} answer   The correct answer
      * @return
      */
-    answer = (response, answer) => {
+    handleAnswer = (response, answer) => {
         let responseSanitised = stripHTML(response).replace(/\s+/g, '');
 
         if (this.isCorrect(responseSanitised, answer)) {
@@ -428,7 +451,7 @@ class Numberwang extends Component {
 
         let numberProps = {
             currentNumber: this.state.currentNumber,
-            answer: this.answer,
+            answer: this.handleAnswer,
             answerAttempts: this.state.answerAttempts
         };
 

@@ -26,6 +26,7 @@ export const modes = [
     }
 ];
 
+// Set the default mode to easy
 export const defaultMode = modes[1];
 
 export default modes;

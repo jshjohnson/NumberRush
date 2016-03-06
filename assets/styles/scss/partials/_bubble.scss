@@ -68,7 +68,7 @@ $bubble-input-border-radius: 10rem;
 }
 
 .bubble--timer {
-    background-color: $bubble-red;
+    background-color: rgba(mix($brand-white, $bubble-red, .15), .85);
     position: absolute;
     right: 18%;
     @include respond-max($global-screen-sm) { right: 22%; }
@@ -79,7 +79,7 @@ $bubble-input-border-radius: 10rem;
 }
 
 .bubble--score {
-    background-color: $bubble-green;
+    background-color: rgba(mix($brand-white, $bubble-green, .15), .85);
     position: absolute;
     left: 22.5%;
     margin-top: -5%;
@@ -88,7 +88,7 @@ $bubble-input-border-radius: 10rem;
 }
 
 .bubble--personalbest {
-    background-color: $bubble-pink;
+    background-color: rgba(mix($brand-white, $bubble-pink, .15), .85);
     position: absolute;
     left: 12%;
     margin-top: $global-guttering;

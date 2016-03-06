@@ -818,7 +818,7 @@ ol {
         font-size: 1.2rem; } }
 
 .bubble--timer {
-  background-color: #EF2F2F;
+  background-color: rgba(239, 47, 47, 0.85);
   position: absolute;
   right: 18%; }
   @media (max-width: 769px) {
@@ -830,7 +830,7 @@ ol {
       right: 15%; } }
 
 .bubble--score {
-  background-color: #00af16;
+  background-color: rgba(0, 175, 22, 0.85);
   position: absolute;
   left: 22.5%;
   margin-top: -5%; }
@@ -842,7 +842,7 @@ ol {
       left: 20%; } }
 
 .bubble--personalbest {
-  background-color: #e91e63;
+  background-color: rgba(233, 30, 99, 0.85);
   position: absolute;
   left: 12%;
   margin-top: 2.4rem; }
