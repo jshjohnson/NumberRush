@@ -27,8 +27,8 @@ $window-focus-font-size: 20rem;
     vertical-align: middle;
     width: 100%;
     height: 100%;
-    padding: $global-guttering*6 $global-guttering;
-    @include respond-max($global-screen-sm) { padding: $global-guttering; }
+    padding: $global-guttering*5 $global-guttering;
+    @include respond-max($global-screen-sm) { padding: $global-guttering $global-guttering 0; }
 }
 
 .window__focus {

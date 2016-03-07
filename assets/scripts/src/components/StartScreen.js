@@ -24,7 +24,7 @@ class StartScreen extends Component {
                             )}
                         </ul>
                         <button className="bubble bubble--input window__form-control window__form-control--push" onClick={ startGame }>Start</button>
-                        <p><small>A thing by <a href="https://github.com/jshjohnson/NumberRush">Josh Johnson</a></small></p>
+                        <p class="zero-bottom"><small>A thing by <a href="https://github.com/jshjohnson/NumberRush">Josh Johnson</a></small></p>
                     </div>
                 </div>
             </screen>
