@@ -15,7 +15,7 @@ module.exports = function(config) {
         },
         reporters: ['spec', 'coverage'],
         coverageReporter: {
-            dir: 'build/reports/coverage',
+            dir: '../tests/reports/coverage',
             reporters: [{
                 type: 'html',
                 subdir: 'report-html'

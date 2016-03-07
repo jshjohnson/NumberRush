@@ -16,6 +16,9 @@ import GameScreen from './GameScreen';
 import ScoreBoard from './ScoreBoard';
 
 // Constants
+let testAudio = document.createElement("audio");
+
+// Upping this cache will clear users' personal best scores! Use with caution
 const CACHE_NUMBER   = 10;
 const REMAINING_TIME = 60000;
 const INCREMENT_TIME = 2000;
@@ -129,7 +132,7 @@ class NumberRush extends Component {
         let controls = [
             { name: 'End', action: this.endGame, active: true },
             { name: 'Restart', action: this.restartGame, active: true },
-            { name: 'Mute', action: this.toggleGameAudio, active: true },
+            { name: 'Mute', action: this.toggleGameAudio, active: testAudio.play ? true : false },
             { name: 'Unmute', action: this.toggleGameAudio, active: false }
         ];
 
