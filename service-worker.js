@@ -3,12 +3,12 @@ var CACHE_NAME = 'number-rush-cache-v5';
 
 // The files we want to cache
 const urlsToCache = [
-    '/index.html',
-    '/assets/audio/beep.mp3',
-    '/assets/audio/incorrect.mp3',
-    '/assets/audio/success.mp3',
-    '/assets/styles/css/main.min.css',
-    '/assets/scripts/dist/bundle.js'
+    'index.html',
+    'assets/audio/beep.mp3',
+    'assets/audio/incorrect.mp3',
+    'assets/audio/success.mp3',
+    'assets/styles/css/main.min.css',
+    'assets/scripts/dist/bundle.js'
 ];
 
 // Set the callback for the install step
