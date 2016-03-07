@@ -1,5 +1,5 @@
 'use strict';
-var CACHE_NAME = 'number-rush-cache-v5';
+var CACHE_NAME = 'number-rush-cache-v6';
 
 // The files we want to cache
 const urlsToCache = [
