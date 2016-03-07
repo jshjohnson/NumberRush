@@ -7,6 +7,7 @@ import { whichAnimationEvent, addAnimation } from '../libs/utils';
 import classNames from 'classnames';
 
 class ScoreBoard extends Component {
+    
     componentWillReceiveProps(nextProps) {
         if(this.props.score != nextProps.score) {
             let score = ReactDOM.findDOMNode(this.refs.score);

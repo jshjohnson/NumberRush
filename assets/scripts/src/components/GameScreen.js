@@ -13,13 +13,6 @@ import GameControls from './GameControls';
 
 class NumberArea extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.createClue = this.createClue.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
-    }
-
     componentDidMount() {
         // Focus input on mount
         ReactDOM.findDOMNode(this.refs.input).focus();
@@ -41,7 +34,7 @@ class NumberArea extends Component {
      * @param  {Number} percent Percent of string to show in clue
      * @return {string}         Clue e.g. 'Dreiun...'
      */
-    createClue(string, percent = 0.4) {
+    createClue = (string, percent = 0.4) => {
         let strArr = string.split('');
         let charCount = Math.floor(strArr.length * percent);
 
@@ -57,7 +50,7 @@ class NumberArea extends Component {
      * @param  {Object} event Reference to key event
      * @return
      */
-    handleKeyUp(event) {
+    handleKeyUp = (event) => {
         let answer = this.props.numberProps.answer;
         if(event.which == 13) {
             answer(event.currentTarget.value, this.props.numberProps.currentNumber);
