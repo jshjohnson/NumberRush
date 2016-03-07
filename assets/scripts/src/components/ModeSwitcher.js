@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 
 class ModeSwitcher extends Component {
     render() {
-        let { modes, changeMode, currentMode } = this.props;
+
+        const { modes, changeMode, currentMode } = this.props;
+        
         return (
             <modeswitcher>
                 <select className="header__input header__input--select header__input--push-left header__input--absolute" onChange={ changeMode } value={ currentMode }>

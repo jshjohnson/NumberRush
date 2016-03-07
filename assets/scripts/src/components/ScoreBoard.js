@@ -20,10 +20,11 @@ class ScoreBoard extends Component {
     };
     
     render() {
-        let { score, personalBest, timer } = this.props;
-        let timerClass = classNames({
+        const { score, personalBest, timer } = this.props;
+        const timerClass = classNames({
             'flash-text': (timer / 1000) <= 10,
         });
+        
         return (
             <scoreboard>
                 <div ref="personalBest" className="bubble bubble--sm bubble--personalbest">

@@ -17,6 +17,7 @@ import ScoreBoard from './ScoreBoard';
 
 // Constants
 const REMAINING_TIME = 60000;
+const INCREMENT_TIME = 2000;
 const CACHE_NUMBER = 8;
 const BEEP = new Audio('assets/audio/beep.mp3');
 const SUCCESS = new Audio('assets/audio/success.mp3');
@@ -47,7 +48,7 @@ class Numberwang extends Component {
         if(localStorage.getItem('NumberRushState') !== null) {
             let parsedState = JSON.parse(localStorage.NumberRushState);
 
-            // And its cache is not out of date
+            // And its cache is not out of date, use the saved state
             if(parsedState.cache && parsedState.cache === CACHE_NUMBER) {
                 SAVED_STATE = parsedState;
             } else {
@@ -191,6 +192,7 @@ class Numberwang extends Component {
 
     /**
      * Restart game with a score of 0 and a new number to answer
+     * @note Could this be turned into just endGame() && startGame()?
      * @return
      */
     restartGame() {
@@ -380,7 +382,7 @@ class Numberwang extends Component {
         // Increment score 
         let score = this.state.score + this.state.currentMode.multiplier;
         // Increment timer
-        let remainingTime = this.state.remainingTime + (this.state.currentMode.multiplier * 1000);
+        let remainingTime = this.state.remainingTime + INCREMENT_TIME;
 
         // If game hasn't been muted
         if(!this.state.mute) {

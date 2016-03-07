@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 class StartScreen extends Component {
     render() {
         
-        let { personalBest, previousScore, startGame } =  this.props;
-        let hasPersonalBest = (personalBest && personalBest > 0) ? true : false;
-        let hasPreviousScore = previousScore ? true : false;
+        const { personalBest, previousScore, startGame } =  this.props;
+        const hasPersonalBest = (personalBest && personalBest > 0) ? true : false;
+        const hasPreviousScore = previousScore ? true : false;
 
         return (
             <screen>

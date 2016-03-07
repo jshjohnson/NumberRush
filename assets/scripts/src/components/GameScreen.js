@@ -65,10 +65,10 @@ class NumberArea extends Component {
     };
 
     render() {
-        let { controls } = this.props;
-        let { modes, changeMode, currentMode } = this.props.modeProps;
-        let { currentNumber, answer, answerAttempts } = this.props.numberProps;
-        let { score, personalBest, remainingTime } = this.props.scoreboardProps;
+        const { controls } = this.props;
+        const { modes, changeMode, currentMode } = this.props.modeProps;
+        const { currentNumber, answer, answerAttempts } = this.props.numberProps;
+        const { score, personalBest, remainingTime } = this.props.scoreboardProps;
     
         return (
             <screen>
