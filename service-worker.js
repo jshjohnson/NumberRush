@@ -1,5 +1,5 @@
 'use strict';
-var CACHE_NAME = 'number-rush-cache-v6';
+var CACHE_NAME = 'number-rush-cache-v7';
 
 // The files we want to cache
 const urlsToCache = [
@@ -7,11 +7,13 @@ const urlsToCache = [
     'assets/audio/beep.mp3',
     'assets/audio/incorrect.mp3',
     'assets/audio/success.mp3',
+    'assets/images/favicon.ico',
+    'assets/images/arrow.svg',
     'assets/styles/css/main.min.css',
     'assets/scripts/dist/bundle.js'
 ];
 
-// Set the callback for the install step
+// Install service worker with cache name and add urls above
 self.addEventListener('install', function(event) {
     // Perform install steps
     event.waitUntil(
@@ -26,6 +28,7 @@ self.addEventListener('install', function(event) {
     );
 });
 
+// Listen for when the browser attempts to fetch assets
 self.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request)
@@ -61,6 +64,25 @@ self.addEventListener('fetch', function(event) {
 
                     return response;
                 }
+            );
+        })
+    );
+});
+
+// Delete pre-existing caches that aren't in a whitelist
+self.addEventListener('activate', function(event) {
+
+    // Store any cache names in this array to avoid deletion.
+    var cacheWhitelist = [CACHE_NAME];
+
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
             );
         })
     );
