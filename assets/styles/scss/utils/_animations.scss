@@ -47,4 +47,5 @@
 .pulse { animation: pulse .5s linear; }
 .bounce-in { animation: bounceIn 1s linear; }
 .flash-text { animation: flashText 1s infinite; }
+.flash-text--slow { animation-duration: 2s; }
 .fade-in { animation: fadeIn .25s linear; }

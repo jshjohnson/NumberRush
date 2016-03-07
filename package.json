@@ -41,6 +41,7 @@
     "classnames": "^2.2.3",
     "csso": "^1.6.4",
     "eslint-plugin-react": "^3.6.2",
+    "glob": "^7.0.3",
     "lodash": "^4.5.1",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.0",

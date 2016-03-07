@@ -1050,6 +1050,10 @@ ol {
   -webkit-animation: flashText 1s infinite;
           animation: flashText 1s infinite; }
 
+.flash-text--slow {
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s; }
+
 .fade-in {
   -webkit-animation: fadeIn .25s linear;
           animation: fadeIn .25s linear; }

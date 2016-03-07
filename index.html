@@ -12,12 +12,30 @@
             <div class="window">
                 <div class="window__outer">
                     <div class="window__inner">
-                        <h2>Loading...</h2>
+                        <h2 class="flash-text flash-text--slow">Loading...</h2>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Service Worker -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ',    registration.scope);
+                }).catch(function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            }
+        </script>
+        <!-- End Service Worker -->
+
+        <!-- App -->
         <script src="assets/scripts/dist/bundle.js"></script>
+        <!-- End App -->
+        
         <!-- Google Analytics -->
         <script>
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
