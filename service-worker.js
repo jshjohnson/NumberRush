@@ -1,5 +1,5 @@
 'use strict';
-var CACHE_NAME = 'number-rush-cache-v11';
+var CACHE_NAME = 'number-rush-cache-v12';
 
 // The files we want to cache
 const urlsToCache = [
@@ -24,6 +24,9 @@ self.addEventListener('install', function(event) {
         })
         .then(function() {
             console.log('WORKER: Install completed');
+        })
+        .catch(function(err) {
+           console.error('Error: ' + err);
         })
     );
 });
@@ -65,6 +68,9 @@ self.addEventListener('fetch', function(event) {
                     return response;
                 }
             );
+        })
+        .catch(function(err) {
+           console.error('Error: ' + err)
         })
     );
 });
