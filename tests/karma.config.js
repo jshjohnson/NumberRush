@@ -7,8 +7,8 @@ module.exports = function(config) {
             '../node_modules/phantomjs-polyfill/bind-polyfill.js',
             '../tests/**/*_spec.js'
         ],
-        plugins: [webpack, 'karma-jasmine', 'karma-phantomjs-launcher', 'karma-coverage', 'karma-spec-reporter'],
-        browsers: ['PhantomJS'],
+        plugins: [webpack, 'karma-jasmine', 'karma-chrome-launcher', 'karma-coverage', 'karma-spec-reporter'],
+        browsers: ['Chrome'],
         preprocessors: {
             '**/*_spec.js': ['webpack'],
             'src/**/*.js': ['webpack']
@@ -19,13 +19,6 @@ module.exports = function(config) {
             reporters: [{
                 type: 'html',
                 subdir: 'report-html'
-            }, {
-                type: 'lcov',
-                subdir: 'report-lcov'
-            }, {
-                type: 'cobertura',
-                subdir: '.',
-                file: 'cobertura.txt'
             }]
         },
         webpack: {
