@@ -23,7 +23,7 @@ class StartScreen extends Component {
                                 <li><h3 className="zero-bottom"><strong>Previous score:</strong> { previousScore }</h3></li>
                             )}
                         </ul>
-                        <button className="bubble bubble--input window__form-control window__form-control--push" onClick={ startGame }>Start</button>
+                        <button ref="startButton" className="bubble bubble--input window__form-control window__form-control--push" onClick={ startGame }>Start</button>
                         <p className="zero-bottom"><small>A thing by <a href="https://github.com/jshjohnson/NumberRush">Josh Johnson</a></small></p>
                     </div>
                 </div>
