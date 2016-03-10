@@ -5,14 +5,10 @@ import ReactTestUtils from 'react-addons-test-utils';
 
 // Components
 import App from '../../assets/scripts/src/components/App';
-// import GameControls from '../../assets/scripts/src/components/GameControls';
-// import GameScreen from '../../assets/scripts/src/components/GameScreen';
-// import ModeSwitcher from '../../assets/scripts/src/components/ModeSwitcher';
-// import Scoreboard from '../../assets/scripts/src/components/Scoreboard';
-// import StartScreen from '../../assets/scripts/src/components/StartScreen';
 
-describe('App', () => {
+describe('StartScreen', () => {
 
+    const REMAINING_TIME = 60000;
     let root, component;
 
     beforeEach(function(){
@@ -30,27 +26,54 @@ describe('App', () => {
     });
 
     it('should initialise with a score of 0', () => {
-        ReactDOM.render(<App />, root);
         expect(component.state.score).toBe(0);
     });
 
     it('should have a timer of 60 seconds', () => {
-        const REMAINING_TIME = 60000;
-
-        ReactDOM.render(<App />, root);
-
         expect(component.state.remainingTime).toBe(REMAINING_TIME);
     });
 
-    // it('should start the game but clicking start', () => {
-    //     ReactDOM.render(<App />, root);
-    //     let startButton = ReactDOM.findDOMNode(component.refs.startButton);
+    it('should begin the game by clicking start', () => {
+        let startButton =  ReactTestUtils.findRenderedDOMComponentWithTag(component, 'button');
+        ReactTestUtils.Simulate.click(startButton);
+        expect(component.state.gameStarted).toBe(true)
+    });
 
-    //     console.log(startButton);
+});
 
-    //     ReactTestUtils.Simulate.click(startButton);
+describe('GameScreen', () => {
 
-    //     expect(component.state.gameStarted).toBe(true);
-    // });
+    const REMAINING_TIME = 60000;
+    let root, component;
+
+    beforeEach(function(){
+        root = document.createElement('div');
+        component = ReactDOM.render(<App />, root);
+
+        // Start game
+        let startButton =  ReactTestUtils.findRenderedDOMComponentWithTag(component, 'button');
+        ReactTestUtils.Simulate.click(startButton);
+    });
+
+
+    it('should decrement the timer', (done) => {
+        setTimeout(function() {
+            expect(component.state.remainingTime).toBeLessThan(REMAINING_TIME);
+            done();
+        }, 1000);
+    });
+
+    it('should pick a number', () => {
+        expect(component.state.currentNumber.digits).toEqual(jasmine.any(Number));
+    });
+
+    it('should translate that number into English', () => {
+        expect(component.state.currentNumber.questionLanguage).toEqual(jasmine.any(String));
+       
+    });
+
+    it('should translate that number into German', () => {
+        expect(component.state.currentNumber.answerLanguage).toEqual(jasmine.any(String));
+    });
 
 });

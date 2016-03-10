@@ -5,7 +5,8 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
         files: [
             '../node_modules/phantomjs-polyfill/bind-polyfill.js',
-            '../tests/**/*_spec.js'
+            '../tests/**/*_spec.js',
+            { pattern: '../assets/audio/**', watched: false, included: false, served: true }
         ],
         plugins: [webpack, 'karma-jasmine', 'karma-chrome-launcher', 'karma-coverage', 'karma-spec-reporter'],
         browsers: ['Chrome'],
@@ -35,6 +36,7 @@ module.exports = function(config) {
                 }]
             }
         },
+        colors: true,
         webpackMiddleware: {
             noInfo: true
         }
