@@ -39,6 +39,11 @@ module.exports = function(config) {
         colors: true,
         webpackMiddleware: {
             noInfo: true
+        },
+        proxies: {
+            '/assets/audio/beep.mp3': '../assets/audio/beep.mp3',
+            '/assets/audio/success.mp3': '../assets/audio/success.mp3',
+            '/assets/audio/incorrect.mp3': '../assets/audio/incorrect.mp3'
         }
     });
 };

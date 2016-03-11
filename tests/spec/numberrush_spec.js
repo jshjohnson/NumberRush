@@ -9,11 +9,11 @@ import App from '../../assets/scripts/src/components/App';
 describe('StartScreen', () => {
 
     const REMAINING_TIME = 60000;
-    let root, component;
+    let root, component, html;
 
     beforeEach(function(){
         root = document.createElement('div');
-        component = ReactDOM.render(<App />, root);
+        component = ReactTestUtils.renderIntoDocument(<App />);
     });
 
     it('should render within <app />', () => {
@@ -36,7 +36,7 @@ describe('StartScreen', () => {
     it('should begin the game by clicking start', () => {
         let startButton =  ReactTestUtils.findRenderedDOMComponentWithTag(component, 'button');
         ReactTestUtils.Simulate.click(startButton);
-        expect(component.state.gameStarted).toBe(true)
+        expect(component.state.gameStarted).toBe(true);
     });
 
 });
@@ -44,11 +44,11 @@ describe('StartScreen', () => {
 describe('GameScreen', () => {
 
     const REMAINING_TIME = 60000;
-    let root, component;
+    let root, component, html;
 
     beforeEach(function(){
         root = document.createElement('div');
-        component = ReactDOM.render(<App />, root);
+        component = ReactTestUtils.renderIntoDocument(<App />);
 
         // Start game
         let startButton =  ReactTestUtils.findRenderedDOMComponentWithTag(component, 'button');
@@ -56,7 +56,7 @@ describe('GameScreen', () => {
     });
 
 
-    it('should decrement the timer', (done) => {
+    it('should decrement the timer', () => {
         setTimeout(function() {
             expect(component.state.remainingTime).toBeLessThan(REMAINING_TIME);
             done();
@@ -69,11 +69,30 @@ describe('GameScreen', () => {
 
     it('should translate that number into English', () => {
         expect(component.state.currentNumber.questionLanguage).toEqual(jasmine.any(String));
-       
     });
 
     it('should translate that number into German', () => {
         expect(component.state.currentNumber.answerLanguage).toEqual(jasmine.any(String));
     });
 
+    // it('should increment the score with a correct answer', () => {
+    //     component.setState({ currentNumber: {
+    //         digits: 30,
+    //         questionLanguage: 'Thirty',
+    //         answerLanguage: 'Dreißig',
+    //     }});
+
+    //     // Find input
+    //     // Input correct answer
+    //     // Test score
+    // });
+
+    it('should end game after the timer runs out', () => {
+        component.setState({ remainingTime: 1000 });
+
+        setTimeout(function() {
+            expect(component.state.gameStarted).toBe(false);
+            done();
+        }, 1000);
+    });
 });
