@@ -5,7 +5,6 @@ import ReactTestUtils from 'react-addons-test-utils';
 
 // Components
 import App from '../../assets/scripts/src/components/App';
-import GameScreen from '../../assets/scripts/src/components/App';
 
 describe('StartScreen', () => {
 
@@ -151,8 +150,4 @@ describe('GameScreen', () => {
             done();
         }, 1000);
     });
-});
-
-describe('Answering', () => {
-
 });
