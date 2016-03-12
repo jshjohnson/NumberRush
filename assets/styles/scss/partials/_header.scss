@@ -37,7 +37,7 @@ $header-height: 50px;
 .header__input--select {
     background-position: right center;
     background-size: 1rem;
-    background-image: url(../../images/arrow.svg);
+    background-image: url('assets/images/arrow.svg');
     background-repeat: no-repeat;
     padding: 0 $global-guttering 0 $global-guttering/2;
     &:focus { outline: none; }
