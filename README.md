@@ -1,6 +1,6 @@
 #Number Rush
 
-My first experimentation with React.js and ServiceWorker: A simple "against the clock" style number based game to help learn German numbers.
+My first experimentation with React.js and ServiceWorker: A simple "against the clock" style, number based game to help learn German numbers.
 
 [Link](https://joshuajohnson.co.uk/NumberRush)
 
