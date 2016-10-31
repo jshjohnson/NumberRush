@@ -640,7 +640,8 @@ ol {
   -moz-appearance: none;
   -webkit-appearance: none;
   background-color: transparent;
-  border: none; }
+  border: none;
+  color: #fff; }
 
 .header__input--select {
   background-position: right center;
