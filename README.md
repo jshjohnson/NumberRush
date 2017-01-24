@@ -4,6 +4,10 @@ My first experimentation with React.js and ServiceWorker: A simple "against the 
 
 [Link](https://joshuajohnson.co.uk/NumberRush)
 
+----
+###Interested in writing your own React web apps? Check out [ReactForBeginners.com](https://ReactForBeginners.com/friend/JOHNSON) for great tutorials!
+----
+
 ##Development
 * Installation: `npm install`
 * Local server (& hot reloading): `npm start`
