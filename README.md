@@ -1,4 +1,4 @@
-#Number Rush
+#Number Rush [![Project Sponsored By ReactForBeginners.com](https://img.shields.io/badge/👍_Project_Sponsored_By-ReactForBeginners.com Tutorials-brightgreen.svg)](https://ReactForBeginners.com/friend/JOHNSON)
 
 My first experimentation with React.js and ServiceWorker: A simple "against the clock" style, number based game to help learn German numbers 🇩🇪.
 
