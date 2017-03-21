@@ -1,11 +1,11 @@
-#Number Rush [![Project Sponsored By ReactForBeginners.com](https://img.shields.io/badge/👍_Project_Sponsored_By-ReactForBeginners.com Tutorials-brightgreen.svg)](https://ReactForBeginners.com/friend/JOHNSON)
+# Number Rush
 
 My first experimentation with React.js and ServiceWorker: A simple "against the clock" style, number based game to help learn German numbers 🇩🇪.
 
 [Link](https://joshuajohnson.co.uk/NumberRush)
 
 ----
-###Interested in writing your own React web apps? Check out [ReactForBeginners.com](https://ReactForBeginners.com/friend/JOHNSON) for great tutorials!
+### Interested in writing your own React web apps? Check out [ReactForBeginners.com](https://ReactForBeginners.com/friend/JOHNSON) for great tutorials!
 ----
 
 ##Development
