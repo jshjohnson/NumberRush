@@ -22,7 +22,7 @@ My first experimentation with React.js and ServiceWorker: A simple "against the 
 ```
     $ npm install --global --production windows-build-tools
 
-    $ yarn config set msvs_version 2015 --global
+    $ npm config set msvs_version 2015 --global
 ```
 and then do a `npm install` in a new command window (so the PATH gets updated). This is needed, unfortunately, to build the SASS compiler.
 
